@@ -15,12 +15,11 @@ FROM debian:bullseye
 
 ENV \
     RUST_LOG="info" \
-    KAFKA_ENABLED="Y" \
-    KAFKA_QUEUES="menu process browser window" \
+    S3_URL="-" \
+    BUCKET_NAME="-" \
+    API_KEY="-" \
+    SECRET_KEY="-" \
     ALLOWED_ORIGIN="*"  \
-    KAFKA_HOST="0.0.0.0:9092" \
-    KAFKA_GROUP="default" \
-    OPENSEARCH_URL="http://localhost:9200" \
     TZ="America/Caracas"
 
 COPY --from=builder /usr/local/cargo/bin/server /usr/local/bin/server
@@ -34,12 +33,18 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     sed -i "s|info|$RUST_LOG|g" /opt/apps/server/.env && \
     sed -i "s|allowed_origin|$ALLOWED_ORIGIN|g" /opt/apps/server/.env && \
-    sed -i "s|kafka_enabled|$KAFKA_ENABLED|g" /opt/apps/server/.env && \
-    sed -i "s|kafka_queues|$KAFKA_QUEUES|g" /opt/apps/server/.env && \
-    sed -i "s|kafka_host|$KAFKA_HOST|g" /opt/apps/server/.env && \
-    sed -i "s|kafka_group|$KAFKA_GROUP|g" /opt/apps/server/.env && \
-    sed -i "s|opensearch_url|$OPENSEARCH_URL|g" /opt/apps/server/.env && \
+    sed -i "s|s3_url|$S3_URL|g" /opt/apps/server/.env && \
+    sed -i "s|bucket_name|$BUCKET_NAME|g" /opt/apps/server/.env && \
+    sed -i "s|api_key|$API_KEY|g" /opt/apps/server/.env && \
+    sed -i "s|secret_key|$SECRET_KEY|g" /opt/apps/server/.env
+
+RUN addgroup adempiere && \
+	adduser --disabled-password --gecos "" --ingroup adempiere --no-create-home adempiere && \
+	chown -R adempiere /opt/apps/server/ && \
+	chmod +x /usr/local/bin/server && \
     echo "Set Timezone..." && \
 	echo $TZ > /etc/timezone
+
+USER adempiere
 
 CMD ["server"]

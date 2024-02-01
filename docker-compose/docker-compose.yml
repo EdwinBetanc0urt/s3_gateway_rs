@@ -1,71 +1,39 @@
 version: "3.9"
-services:
-  zookeeper:
-    image: ${ZOOKEEPER_IMAGE}
-    container_name: ${ZOOKEEPER_HOST}
-    restart: ${GENERIC_RESTART}
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - ${ZOOKEEPER_PORT}:2181
-    networks:
-      - shared_network
-  
-  kafka:
-    image: ${KAFKA_IMAGE}
-    container_name: ${KAFKA_HOST}
-    restart: ${GENERIC_RESTART}
-    depends_on:
-      - zookeeper
-    ports:
-      - ${KAFKA_PORT}:29092
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://${KAFKA_BROKER_HOST}:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-    networks:
-      - shared_network
 
-  opensearch-service:
-    image: ${OPENSEARCH_IMAGE}
-    container_name: ${OPENSEARCH_HOST}
+name: services-s3-gateway
+
+services:
+
+  s3.gateway.service:
+    image: ${S3_GATEWAY_RS_IMAGE}
+    container_name: ${S3_GATEWAY_RS_HOST}
     restart: ${GENERIC_RESTART}
     environment:
-      - node.name=opensearch-service
-      - discovery.type=single-node
-      - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
-      - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-      nofile:
-        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
-        hard: 65536
-    volumes:
-      - volume_opensearch:/usr/share/opensearch/data
+      S3_URL: ${S3_GATEWAY_RS_S3_URL}
+      BUCKET_NAME: ${S3_GATEWAY_RS_BUCKET_NAME}
+      API_KEY: ${S3_GATEWAY_RS_API_KEY}
+      SECRET_KEY: ${S3_GATEWAY_RS_SECRET_KEY}
     ports:
-      - ${OPENSEARCH_PORT}:9200
-      - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
+      - ${S3_GATEWAY_RS_PORT}:7878
     networks:
       - shared_network
   
-  opensearch.gateway.rs:
-    image: ${OPENSEARCH_GATEWAY_RS_IMAGE}
-    container_name: ${OPENSEARCH_GATEWAY_RS_HOST}
+  s3.service:
+    image: ${S3_IMAGE}
+    container_name: ${S3_HOST}
     restart: ${GENERIC_RESTART}
-    depends_on:
-      - kafka
-      - opensearch-service
-    environment:
-      KAFKA_HOST: "kafka:9092"
-      OPENSEARCH_URL: "http://opensearch-service:9200"
     ports:
-      - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
+      - ${S3_PORT}:9000
+      - ${S3_CONSOLE_PORT}:9090
+    command:
+      - "server"
+      - "/data"
+      - "--console-address=:9090"
+    environment:
+      MINIO_ROOT_USER: ${S3_USER}
+      MINIO_ROOT_PASSWORD: ${S3_PASSWORD}
+    volumes:
+      - volume_s3:/data
     networks:
       - shared_network
 
@@ -74,5 +42,5 @@ networks:
     name: ${DEFAULT_NETWORK}
      
 volumes:
-  volume_opensearch:
-    name: ${OPENSEARCH_VOLUME}
+  volume_s3:
+    name: ${S3_VOLUME}

@@ -1,6 +1,4 @@
-pub mod models;
 pub mod controller;
-
 // #[cfg(test)]
 // mod tests {
 //     use crate::{models::menu::Menu, controller::opensearch::{create_index_definition, IndexDocument, create, delete_index_definition, delete, find}};

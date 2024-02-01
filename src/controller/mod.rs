@@ -1,2 +1,1 @@
-pub mod kafka;
-pub mod opensearch;
+pub mod s3;
