@@ -7,18 +7,11 @@ use minio::s3::client::Client;
 use minio::s3::creds::StaticProvider;
 use minio::s3::http::BaseUrl;
 
-pub async fn request_signed_url(_file_name: String, _method: Method) -> Result<String, std::io::Error> {
+pub async fn request_signed_url(_bucket_name: String, _file_name: String, _method: Method) -> Result<String, std::io::Error> {
     let _s3_url =  match env::var("S3_URL") {
         Ok(value) => value,
         Err(_) => {
             log::info!("Variable `S3_URL` Not found");
-            "".to_owned()
-        }.to_owned(),
-    };
-    let _bucket_name =  match env::var("BUCKET_NAME") {
-        Ok(value) => value,
-        Err(_) => {
-            log::info!("Variable `BUCKET_NAME` Not found");
             "".to_owned()
         }.to_owned(),
     };

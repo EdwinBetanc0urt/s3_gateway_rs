@@ -59,12 +59,12 @@ async fn main() {
     let router = Router::new()
         .hoop(cors_handler)
         .push(
-            Router::with_path("api/presignedUrl")
-                .get(get_presigned_url)
+            Router::with_path("api/resources/upload/<bucket_name>/<file_name>")
+                .get(redirect_upload)
         )
         .push(
-            Router::with_path("api/resources/<file_name>")
-                .goal(index)
+            Router::with_path("api/resources/<bucket_name>/<file_name>")
+                .goal(redirect_download)
         )
         ;
     log::info!("{:#?}", router);
@@ -74,9 +74,10 @@ async fn main() {
 
 #[handler]
 async fn get_presigned_url<'a>(_req: &mut Request, _res: &mut Response) {
-    let _file_name = _req.query::<String>("file_name");
+    let _bucket_name = _req.param::<String>("bucket_name");
+    let _file_name = _req.param::<String>("file_name");
     if _file_name.is_some() {
-        match request_signed_url(_file_name.unwrap(), http::Method::PUT).await {
+        match request_signed_url(_bucket_name.unwrap(), _file_name.unwrap(), http::Method::PUT).await {
             Ok(menu) => _res.render(Json(menu)),
             Err(error) => {
                 _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
@@ -90,10 +91,30 @@ async fn get_presigned_url<'a>(_req: &mut Request, _res: &mut Response) {
 }
 
 #[handler]
-async fn index(_req: &mut Request, _res: &mut Response) -> Result<()> {
+async fn redirect_upload(_req: &mut Request, _res: &mut Response) -> Result<()> {
+    let _bucket_name = _req.param::<String>("bucket_name");
     let _file_name = _req.param::<String>("file_name");
     if _file_name.is_some() {
-        match request_signed_url(_file_name.unwrap(), http::Method::GET).await {
+        match request_signed_url(_bucket_name.unwrap(), _file_name.unwrap(), http::Method::PUT).await {
+            Ok(url) => _res.render(Json(url)),
+            Err(error) => {
+                _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
+                _res.render(Json(error.to_string()));
+            }
+        }
+    } else {
+        _res.render("File Name is mandatory".to_string());
+        _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
+    }
+    Ok(())
+}
+
+#[handler]
+async fn redirect_download(_req: &mut Request, _res: &mut Response) -> Result<()> {
+    let _bucket_name = _req.param::<String>("bucket_name");
+    let _file_name = _req.param::<String>("file_name");
+    if _file_name.is_some() {
+        match request_signed_url(_bucket_name.unwrap(), _file_name.unwrap(), http::Method::GET).await {
             Ok(url) => _res.render(Redirect::other(url)),
             Err(error) => {
                 _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
