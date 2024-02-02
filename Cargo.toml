@@ -1,5 +1,5 @@
 [package]
-name = "opensearch_gateway_rs"
+name = "s3_gateway_rs"
 version = "0.1.0"
 edition = "2021"
 publish = false
@@ -9,7 +9,7 @@ publish = false
 [dependencies]
 dotenv = "0.15.0"
 serde = "1.0.137"
-salvo = { version = "0.63.1", features=["cors"] }
+salvo = { version = "0.63.1", features=["cors", "proxy"] }
 tokio = { version = "1", features = ["macros"] }
 serde_json = "1.0.91"
 log = "0.4.17"

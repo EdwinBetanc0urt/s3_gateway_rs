@@ -1,12 +1,13 @@
 use std::{env, io::Error, io::ErrorKind};
 use std::str::FromStr;
 
+use http::Method;
 use minio::s3::args::GetPresignedObjectUrlArgs;
 use minio::s3::client::Client;
 use minio::s3::creds::StaticProvider;
 use minio::s3::http::BaseUrl;
 
-pub async fn create_device_user(_file_name: String) -> Result<String, std::io::Error> {
+pub async fn request_signed_url(_file_name: String, _method: Method) -> Result<String, std::io::Error> {
     let _s3_url =  match env::var("S3_URL") {
         Ok(value) => value,
         Err(_) => {
@@ -38,7 +39,7 @@ pub async fn create_device_user(_file_name: String) -> Result<String, std::io::E
     let mut _base_url: BaseUrl = BaseUrl::from_str(&_s3_url).expect("Error with url");
     _base_url.https = false;
 
-    let static_provider = StaticProvider::new(
+    let static_provider: StaticProvider = StaticProvider::new(
         &_api_key, 
         &_secret_key, None);
 
@@ -47,7 +48,7 @@ pub async fn create_device_user(_file_name: String) -> Result<String, std::io::E
     let args_to_match = GetPresignedObjectUrlArgs::new(
         &_bucket_name,
         _file_name.as_str(),
-            http::Method::GET,
+        _method,
     );
 
     match args_to_match {

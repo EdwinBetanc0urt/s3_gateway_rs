@@ -1,6 +1,7 @@
 use std::env;
 use dotenv::dotenv;
-use opensearch_gateway_rs::controller::s3::create_device_user;
+use s3_gateway_rs::controller::s3::request_signed_url;
+use salvo::Result;
 use salvo::{prelude::*, cors::Cors, hyper::Method};
 extern crate serde_json;
 use simple_logger::SimpleLogger;
@@ -51,16 +52,19 @@ async fn main() {
             "".to_owned()
         }.to_owned(),
     };
-    //  Send Device Info
     log::info!("Server Address: {:?}", host.clone());
     let cors_handler = Cors::new()
     .allow_origin(&allowed_origin.to_owned())
-    .allow_methods(vec![Method::GET, Method::POST, Method::DELETE]).into_handler();
+    .allow_methods(vec![Method::GET, Method::POST, Method::DELETE, Method::PUT]).into_handler();
     let router = Router::new()
         .hoop(cors_handler)
         .push(
             Router::with_path("api/presignedUrl")
                 .get(get_presigned_url)
+        )
+        .push(
+            Router::with_path("api/resources/<file_name>")
+                .goal(index)
         )
         ;
     log::info!("{:#?}", router);
@@ -72,7 +76,7 @@ async fn main() {
 async fn get_presigned_url<'a>(_req: &mut Request, _res: &mut Response) {
     let _file_name = _req.query::<String>("file_name");
     if _file_name.is_some() {
-        match create_device_user(_file_name.unwrap()).await {
+        match request_signed_url(_file_name.unwrap(), http::Method::PUT).await {
             Ok(menu) => _res.render(Json(menu)),
             Err(error) => {
                 _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
@@ -83,4 +87,22 @@ async fn get_presigned_url<'a>(_req: &mut Request, _res: &mut Response) {
         _res.render("File Name is mandatory".to_string());
         _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
     }
+}
+
+#[handler]
+async fn index(_req: &mut Request, _res: &mut Response) -> Result<()> {
+    let _file_name = _req.param::<String>("file_name");
+    if _file_name.is_some() {
+        match request_signed_url(_file_name.unwrap(), http::Method::GET).await {
+            Ok(url) => _res.render(Redirect::other(url)),
+            Err(error) => {
+                _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
+                _res.render(Json(error.to_string()));
+            }
+        }
+    } else {
+        _res.render("File Name is mandatory".to_string());
+        _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
+    }
+    Ok(())
 }
