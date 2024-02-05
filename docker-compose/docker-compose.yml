@@ -4,10 +4,52 @@ name: services-s3-gateway
 
 services:
 
+  s3.service:
+    image: ${S3_IMAGE}
+    container_name: ${S3_HOST}
+    restart: ${GENERIC_RESTART}
+    command:
+      - "server"
+      - "/data"
+      - "--console-address=:${S3_CONSOLE_INTERNAL_PORT}"
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/9000; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    environment:
+      MINIO_ROOT_USER: ${S3_USER}
+      MINIO_ROOT_PASSWORD: ${S3_PASSWORD}
+    ports:
+      - ${S3_PORT}:9000
+      - ${S3_CONSOLE_PORT}:${S3_CONSOLE_INTERNAL_PORT}
+    networks:
+      - shared_network
+    volumes:
+      - volume_s3:/data
+
+  s3.client:
+    image: ${S3_CLIENT_IMAGE}
+    container_name: ${S3_CLIENT_HOST}
+    depends_on:
+      s3.service:
+        condition: service_healthy
+    entrypoint: /bin/sh -c
+    command: |
+      sleep 5
+      mc config host add local http://s3.service:9000 ${S3_CLIENT_ACCESS_KEY} ${S3_CLIENT_SECRET_KEY}
+      mc --insecure mb local/${S3_CLIENT_BUCKET_NAME}
+    networks:
+      - shared_network
+
   s3.gateway.service:
     image: ${S3_GATEWAY_RS_IMAGE}
     container_name: ${S3_GATEWAY_RS_HOST}
     restart: ${GENERIC_RESTART}
+    depends_on:
+      s3.service:
+        condition: service_healthy
     environment:
       S3_URL: ${S3_GATEWAY_RS_S3_URL}
       BUCKET_NAME: ${S3_GATEWAY_RS_BUCKET_NAME}
@@ -17,30 +59,13 @@ services:
       - ${S3_GATEWAY_RS_PORT}:7878
     networks:
       - shared_network
-  
-  s3.service:
-    image: ${S3_IMAGE}
-    container_name: ${S3_HOST}
-    restart: ${GENERIC_RESTART}
-    ports:
-      - ${S3_PORT}:9000
-      - ${S3_CONSOLE_PORT}:9090
-    command:
-      - "server"
-      - "/data"
-      - "--console-address=:9090"
-    environment:
-      MINIO_ROOT_USER: ${S3_USER}
-      MINIO_ROOT_PASSWORD: ${S3_PASSWORD}
-    volumes:
-      - volume_s3:/data
-    networks:
-      - shared_network
+
 
 networks:
   shared_network:
     name: ${DEFAULT_NETWORK}
-     
+
+
 volumes:
   volume_s3:
     name: ${S3_VOLUME}
