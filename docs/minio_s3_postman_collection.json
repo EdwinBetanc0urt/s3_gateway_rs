@@ -4,7 +4,7 @@
 		"name": "Minio S3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18440575",
-		"_collection_link": "https://developerpya.postman.co/workspace/1fb216db-1011-498d-83ab-258082f68995/collection/18440575-ddb7903a-997d-45f5-bbe0-332f300d79ca?action=share&source=collection_link&creator=18440575"
+		"_collection_link": "https://developerpya.postman.co/workspace/Y-Workspace~1fb216db-1011-498d-83ab-258082f68995/collection/18440575-ddb7903a-997d-45f5-bbe0-332f300d79ca?action=share&source=collection_link&creator=18440575"
 	},
 	"item": [
 		{
@@ -16,7 +16,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7878/api/resources/logo.png",
+					"raw": "http://localhost:7878/api/resources/logo.jpg",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -25,14 +25,14 @@
 					"path": [
 						"api",
 						"resources",
-						"logo.png"
+						"logo.jpg"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "presignedUrl Rust",
+			"name": "Presigned Url",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -40,7 +40,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7878/api/presignedUrl?file_name=logo.png",
+					"raw": "http://localhost:7878/api/resources/presigned-url/Epale.rs",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -48,17 +48,70 @@
 					"port": "7878",
 					"path": [
 						"api",
-						"presignedUrl"
-					],
-					"query": [
-						{
-							"key": "file_name",
-							"value": "logo.png"
-						}
+						"resources",
+						"presigned-url",
+						"Epale.rs"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "presignedUrl Rust",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7878/api/resources/presigned-url/Epale.rs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7878",
+							"path": [
+								"api",
+								"resources",
+								"presigned-url",
+								"Epale.rs"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "vary",
+							"value": "origin"
+						},
+						{
+							"key": "vary",
+							"value": "access-control-request-method"
+						},
+						{
+							"key": "vary",
+							"value": "access-control-request-headers"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "content-length",
+							"value": "306"
+						},
+						{
+							"key": "date",
+							"value": "Tue, 06 Feb 2024 04:27:14 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "\"http://localhost:9000/test/Epale.rs?X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=b510233365c5e275880e1772801871a65e1c0d307b86fba908674bc86a8b08a7&X-Amz-Credential=MlMRE2XTK2UpDwuRBmn6%2F20240206%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240206T042714Z\""
+				}
+			]
 		},
 		{
 			"name": "Upload File",
@@ -116,7 +169,118 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Ok",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/tmp/Epale.rs"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/test/Epale.rs?X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=b510233365c5e275880e1772801871a65e1c0d307b86fba908674bc86a8b08a7&X-Amz-Credential=MlMRE2XTK2UpDwuRBmn6%2F20240206%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240206T042714Z",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"test",
+								"Epale.rs"
+							],
+							"query": [
+								{
+									"key": "X-Amz-Expires",
+									"value": "604800"
+								},
+								{
+									"key": "X-Amz-SignedHeaders",
+									"value": "host"
+								},
+								{
+									"key": "X-Amz-Signature",
+									"value": "b510233365c5e275880e1772801871a65e1c0d307b86fba908674bc86a8b08a7"
+								},
+								{
+									"key": "X-Amz-Credential",
+									"value": "MlMRE2XTK2UpDwuRBmn6%2F20240206%2Fus-east-1%2Fs3%2Faws4_request"
+								},
+								{
+									"key": "X-Amz-Algorithm",
+									"value": "AWS4-HMAC-SHA256"
+								},
+								{
+									"key": "X-Amz-Date",
+									"value": "20240206T042714Z"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Accept-Ranges",
+							"value": "bytes"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "ETag",
+							"value": "\"6269bbcedf48073118e1f7798ccb9aa3\""
+						},
+						{
+							"key": "Server",
+							"value": "MinIO"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000; includeSubDomains"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "X-Amz-Id-2",
+							"value": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8"
+						},
+						{
+							"key": "X-Amz-Request-Id",
+							"value": "17B12B9ED3EDF4E9"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-Xss-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 06 Feb 2024 04:28:14 GMT"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
 		}
 	]
 }
