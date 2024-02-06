@@ -4,9 +4,72 @@
 		"name": "Minio S3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18440575",
-		"_collection_link": "https://developerpya.postman.co/workspace/Y-Workspace~1fb216db-1011-498d-83ab-258082f68995/collection/18440575-ddb7903a-997d-45f5-bbe0-332f300d79ca?action=share&source=collection_link&creator=18440575"
+		"_collection_link": "https://developerpya.postman.co/workspace/1fb216db-1011-498d-83ab-258082f68995/collection/18440575-ddb7903a-997d-45f5-bbe0-332f300d79ca?action=share&source=collection_link&creator=18440575"
 	},
 	"item": [
+		{
+			"name": "New Service",
+			"item": [
+				{
+					"name": "New Request",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/home/yamel/Downloads/logo (1).png"
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0/api/presigned-url/logo.jpg",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"path": [
+								"api",
+								"presigned-url",
+								"logo.jpg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get File Gateway",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0/api/download/logo.jpg",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"path": [
+								"api",
+								"download",
+								"logo.jpg"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "Get File",
 			"request": {
