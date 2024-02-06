@@ -1,7 +1,7 @@
 use std::env;
 use dotenv::dotenv;
 use s3_gateway_rs::controller::s3::request_signed_url;
-use salvo::{prelude::*, cors::Cors, hyper::Method};
+use salvo::{prelude::*, cors::Cors, hyper::Method, logging::Logger};
 extern crate serde_json;
 use simple_logger::SimpleLogger;
 
@@ -65,7 +65,8 @@ async fn main() {
             Router::with_path("api/resources/presigned-url/<file_name>")
                 .get(get_presigned_url_put_file)
         )
-        ;
+        .hoop(Logger::new())
+    ;
     log::info!("{:#?}", router);
     let acceptor = TcpListener::new(&host).bind().await;
     Server::new(acceptor).serve(router).await;
