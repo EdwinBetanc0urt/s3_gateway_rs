@@ -103,7 +103,7 @@ Server Address: "0.0.0.0:7878"
 For test it just run a CURL like this:
 
 ```bash
-curl --location 'http://localhost:7878/api/presignedUrl?file_name=File.txt'
+curl -L -X GET 'http://localhost:7878/api/presignedUrl?file_name=File.txt'
 ```
 
 The response:
@@ -112,10 +112,17 @@ The response:
 "http://localhost:9000/test/File.txt?X-Amz-Signature=855063e40b4d606351c4698f1b85bf3e4ba9af320ddd31b65619ddfd5dde0766&X-Amz-Credential=QrhtkEZoeiO4NsI3VQ7j%2F20240201%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240201T192400Z&X-Amz-SignedHeaders=host&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=604800"
 ```
 
+For the upload resousrce
+
+```bash
+curl -L -X PUT 'http://localhost:9000/test/File.txt?X-Amz-Signature=855063e40b4d606351c4698f1b85bf3e4ba9af320ddd31b65619ddfd5dde0766&X-Amz-Credential=QrhtkEZoeiO4NsI3VQ7j%2F20240201%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240201T192400Z&X-Amz-SignedHeaders=host&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=604800' \
+--data-binary '@/File.txt'
+```
+
 For get resource
 
 ```bash
-curl --location 'http://localhost:7878/api/resources/File.txt'
+curl -L -X GET 'http://localhost:7878/api/resources/File.txt'
 ```
 
 A complete doc [here](https://documenter.getpostman.com/view/18440575/2s9YyvBfUV)
