@@ -43,7 +43,7 @@ pub async fn request_signed_url(_file_name: String, _method: Method) -> Result<S
         &_api_key, 
         &_secret_key, None);
 
-        let client = Client::new(_base_url.clone(), Some(Box::new(static_provider)), None, None).unwrap();
+    let client = Client::new(_base_url.clone(), Some(Box::new(static_provider)), None, None).unwrap();
 
     let args_to_match = GetPresignedObjectUrlArgs::new(
         &_bucket_name,

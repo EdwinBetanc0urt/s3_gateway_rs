@@ -37,6 +37,26 @@ services:
     networks:
       - shared_network
 
+  ui.gateway:
+    image: ${GATEWAY_IMAGE}
+    container_name: ${GATEWAY_HOST}
+    depends_on:
+      s3.gateway.service:
+        condition: service_started
+      s3.service:
+        condition: service_started
+    ports:
+      - ${GATEWAY_PORT}:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/gateway/default.conf:/etc/nginx/default.conf
+      - ./nginx/api/:/etc/nginx/api_conf.d/
+      - ./nginx/upstreams/:/etc/nginx/api_upstreams_conf.d/
+      - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
+      - ./nginx/njs/:/etc/nginx/njs/
+    networks:
+      - shared_network
+
 networks:
   shared_network:
     name: ${DEFAULT_NETWORK}
