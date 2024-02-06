@@ -8,7 +8,9 @@ WORKDIR /opt/apps/server
 COPY . . /opt/apps/server/
 
 RUN apt-get update && \
-	apt-get install -y pkg-config libssl-dev && \
+	apt-get install -y \
+		pkg-config \
+		libssl-dev && \
 	rm -rf /var/lib/apt/lists/* && \
 	cargo install --config net.git-fetch-with-cli=true --path . && \
 	mv docker/template.env /usr/local/cargo/bin/ && \
@@ -32,9 +34,14 @@ COPY --from=builder /usr/local/cargo/bin/server /usr/local/bin/server
 WORKDIR /opt/apps/server
 
 COPY --from=builder /usr/local/cargo/bin/template.env /opt/apps/server/template.env
+COPY --from=builder /usr/local/cargo/bin/start.sh /opt/apps/server/start.sh
 
 RUN apt-get update && \ 
-	apt-get install -y pkg-config openssl libssl-dev tzdata && \
+	apt-get install -y \
+		pkg-config \
+		openssl \
+		libssl-dev \
+		tzdata && \
 	rm -rf /var/lib/apt/lists/*
 
 RUN addgroup adempiere && \
