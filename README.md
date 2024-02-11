@@ -128,3 +128,6 @@ curl -L -X GET 'http://localhost:7878/api/resources/File.txt'
 A complete doc [here](https://documenter.getpostman.com/view/18440575/2s9YyvBfUV)
 
 The exported Postman file can be used from [here](docs/minio_s3_postman_collection.json)
+
+
+To review the library source just click [here](https://github.com/minio/minio-rs)
