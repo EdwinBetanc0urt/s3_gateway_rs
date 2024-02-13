@@ -4,28 +4,19 @@
 		"name": "Minio S3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18440575",
-		"_collection_link": "https://developerpya.postman.co/workspace/1fb216db-1011-498d-83ab-258082f68995/collection/18440575-ddb7903a-997d-45f5-bbe0-332f300d79ca?action=share&source=collection_link&creator=18440575"
+		"_collection_link": "https://developerpya.postman.co/workspace/Y-Workspace~1fb216db-1011-498d-83ab-258082f68995/collection/18440575-ddb7903a-997d-45f5-bbe0-332f300d79ca?action=share&source=collection_link&creator=18440575"
 	},
 	"item": [
 		{
-			"name": "New Service",
+			"name": "Gateway Service",
 			"item": [
 				{
-					"name": "New Request",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "Presigned Url",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "file",
-							"file": {
-								"src": "/home/yamel/Downloads/logo (1).png"
-							}
-						},
 						"url": {
-							"raw": "http://0.0.0.0/api/presigned-url/logo.jpg",
+							"raw": "http://0.0.0.0/api/resources/presigned-url/Image.jpeg",
 							"protocol": "http",
 							"host": [
 								"0",
@@ -35,15 +26,16 @@
 							],
 							"path": [
 								"api",
+								"resources",
 								"presigned-url",
-								"logo.jpg"
+								"Image.jpeg"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get File Gateway",
+					"name": "Get File",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -67,6 +59,86 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete File",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7878/api/resources/Image.jpeg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7878",
+							"path": [
+								"api",
+								"resources",
+								"Image.jpeg"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Ok",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/resources/Image.jpeg",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"resources",
+										"Image.jpeg"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "vary",
+									"value": "origin"
+								},
+								{
+									"key": "vary",
+									"value": "access-control-request-method"
+								},
+								{
+									"key": "vary",
+									"value": "access-control-request-headers"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "4"
+								},
+								{
+									"key": "date",
+									"value": "Tue, 13 Feb 2024 00:44:44 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "\"Ok\""
+						}
+					]
 				}
 			]
 		},
@@ -79,7 +151,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7878/api/resources/logo.jpg",
+					"raw": "http://localhost:7878/api/resources/Image.jpeg",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -88,22 +160,22 @@
 					"path": [
 						"api",
 						"resources",
-						"logo.jpg"
+						"Image.jpeg"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Presigned Url",
+			"name": "Delete File",
 			"request": {
 				"auth": {
 					"type": "noauth"
 				},
-				"method": "GET",
+				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7878/api/resources/presigned-url/Epale.rs",
+					"raw": "http://localhost:7878/api/resources/Image.jpeg",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -112,19 +184,18 @@
 					"path": [
 						"api",
 						"resources",
-						"presigned-url",
-						"Epale.rs"
+						"Image.jpeg"
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "presignedUrl Rust",
+					"name": "Ok",
 					"originalRequest": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:7878/api/resources/presigned-url/Epale.rs",
+							"raw": "http://localhost:7878/api/resources/Image.jpeg",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -133,8 +204,7 @@
 							"path": [
 								"api",
 								"resources",
-								"presigned-url",
-								"Epale.rs"
+								"Image.jpeg"
 							]
 						}
 					},
@@ -164,15 +234,97 @@
 						},
 						{
 							"key": "content-length",
-							"value": "306"
+							"value": "4"
 						},
 						{
 							"key": "date",
-							"value": "Tue, 06 Feb 2024 04:27:14 GMT"
+							"value": "Tue, 13 Feb 2024 00:44:44 GMT"
 						}
 					],
 					"cookie": [],
-					"body": "\"http://localhost:9000/test/Epale.rs?X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=b510233365c5e275880e1772801871a65e1c0d307b86fba908674bc86a8b08a7&X-Amz-Credential=MlMRE2XTK2UpDwuRBmn6%2F20240206%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240206T042714Z\""
+					"body": "\"Ok\""
+				}
+			]
+		},
+		{
+			"name": "Presigned Url",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7878/api/resources/presigned-url/Image.jpeg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7878",
+					"path": [
+						"api",
+						"resources",
+						"presigned-url",
+						"Image.jpeg"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Presigned Url",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7878/api/resources/presigned-url/Image.jpeg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7878",
+							"path": [
+								"api",
+								"resources",
+								"presigned-url",
+								"Image.jpeg"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "vary",
+							"value": "origin"
+						},
+						{
+							"key": "vary",
+							"value": "access-control-request-method"
+						},
+						{
+							"key": "vary",
+							"value": "access-control-request-headers"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "content-length",
+							"value": "302"
+						},
+						{
+							"key": "date",
+							"value": "Tue, 13 Feb 2024 00:57:02 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "\"http://localhost:9000/adempiere/Image.jpeg?X-Amz-SignedHeaders=host&X-Amz-Date=20240213T005702Z&X-Amz-Credential=adempiere%2F20240213%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=44add8c0cc8e1fc1e6aed9f3841a170d76bf35b0615493ebb9eab5cb9616c06a&X-Amz-Algorithm=AWS4-HMAC-SHA256\""
 				}
 			]
 		},
@@ -187,98 +339,95 @@
 				"body": {
 					"mode": "file",
 					"file": {
-						"src": "/tmp/logo.png"
+						"src": "/tmp/Image.jpeg"
 					}
 				},
 				"url": {
-					"raw": "http://20.12.0.23:9000/hola/logo.png?X-Amz-Signature=18a642ba62e4f5d530a06eb38270dff088c60729b664907912c0a6fed686d51f&X-Amz-Expires=604800&X-Amz-Credential=3Hm5TxATyhAMBsNBOlsk%2F20240202%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240202T190200Z&X-Amz-SignedHeaders=host",
+					"raw": "http://localhost:9000/adempiere/Image.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-SignedHeaders=host&X-Amz-Date=20240213T005651Z&X-Amz-Signature=960122e6ad6c802f39fed37a49bc493be053fc652d501187d9171aad39830d2f&X-Amz-Credential=adempiere%2F20240213%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800",
 					"protocol": "http",
 					"host": [
-						"20",
-						"12",
-						"0",
-						"23"
+						"localhost"
 					],
 					"port": "9000",
 					"path": [
-						"hola",
-						"logo.png"
+						"adempiere",
+						"Image.jpeg"
 					],
 					"query": [
-						{
-							"key": "X-Amz-Signature",
-							"value": "18a642ba62e4f5d530a06eb38270dff088c60729b664907912c0a6fed686d51f"
-						},
-						{
-							"key": "X-Amz-Expires",
-							"value": "604800"
-						},
-						{
-							"key": "X-Amz-Credential",
-							"value": "3Hm5TxATyhAMBsNBOlsk%2F20240202%2Fus-east-1%2Fs3%2Faws4_request"
-						},
 						{
 							"key": "X-Amz-Algorithm",
 							"value": "AWS4-HMAC-SHA256"
 						},
 						{
-							"key": "X-Amz-Date",
-							"value": "20240202T190200Z"
-						},
-						{
 							"key": "X-Amz-SignedHeaders",
 							"value": "host"
+						},
+						{
+							"key": "X-Amz-Date",
+							"value": "20240213T005651Z"
+						},
+						{
+							"key": "X-Amz-Signature",
+							"value": "960122e6ad6c802f39fed37a49bc493be053fc652d501187d9171aad39830d2f"
+						},
+						{
+							"key": "X-Amz-Credential",
+							"value": "adempiere%2F20240213%2Fus-east-1%2Fs3%2Faws4_request"
+						},
+						{
+							"key": "X-Amz-Expires",
+							"value": "604800"
 						}
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "Ok",
+					"name": "Upload File",
 					"originalRequest": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "file",
 							"file": {
-								"src": "/tmp/Epale.rs"
+								"src": "/tmp/Image.jpeg"
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9000/test/Epale.rs?X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=b510233365c5e275880e1772801871a65e1c0d307b86fba908674bc86a8b08a7&X-Amz-Credential=MlMRE2XTK2UpDwuRBmn6%2F20240206%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240206T042714Z",
+							"raw": "http://localhost:9000/adempiere/Image.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-SignedHeaders=host&X-Amz-Date=20240213T005651Z&X-Amz-Signature=960122e6ad6c802f39fed37a49bc493be053fc652d501187d9171aad39830d2f&X-Amz-Credential=adempiere%2F20240213%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "9000",
 							"path": [
-								"test",
-								"Epale.rs"
+								"adempiere",
+								"Image.jpeg"
 							],
 							"query": [
 								{
-									"key": "X-Amz-Expires",
-									"value": "604800"
+									"key": "X-Amz-Algorithm",
+									"value": "AWS4-HMAC-SHA256"
 								},
 								{
 									"key": "X-Amz-SignedHeaders",
 									"value": "host"
 								},
 								{
+									"key": "X-Amz-Date",
+									"value": "20240213T005651Z"
+								},
+								{
 									"key": "X-Amz-Signature",
-									"value": "b510233365c5e275880e1772801871a65e1c0d307b86fba908674bc86a8b08a7"
+									"value": "960122e6ad6c802f39fed37a49bc493be053fc652d501187d9171aad39830d2f"
 								},
 								{
 									"key": "X-Amz-Credential",
-									"value": "MlMRE2XTK2UpDwuRBmn6%2F20240206%2Fus-east-1%2Fs3%2Faws4_request"
+									"value": "adempiere%2F20240213%2Fus-east-1%2Fs3%2Faws4_request"
 								},
 								{
-									"key": "X-Amz-Algorithm",
-									"value": "AWS4-HMAC-SHA256"
-								},
-								{
-									"key": "X-Amz-Date",
-									"value": "20240206T042714Z"
+									"key": "X-Amz-Expires",
+									"value": "604800"
 								}
 							]
 						}
@@ -301,7 +450,7 @@
 						},
 						{
 							"key": "ETag",
-							"value": "\"6269bbcedf48073118e1f7798ccb9aa3\""
+							"value": "\"d6bf4f8ec0a58ef75b34b30bb83aa4d1\""
 						},
 						{
 							"key": "Server",
@@ -325,7 +474,7 @@
 						},
 						{
 							"key": "X-Amz-Request-Id",
-							"value": "17B12B9ED3EDF4E9"
+							"value": "17B3462CC21C527F"
 						},
 						{
 							"key": "X-Content-Type-Options",
@@ -337,7 +486,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Tue, 06 Feb 2024 04:28:14 GMT"
+							"value": "Tue, 13 Feb 2024 00:57:21 GMT"
 						}
 					],
 					"cookie": [],

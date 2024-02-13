@@ -1,6 +1,6 @@
 use std::env;
 use dotenv::dotenv;
-use s3_gateway_rs::controller::s3::request_signed_url;
+use s3_gateway_rs::controller::s3::{delete_object, request_signed_url};
 use salvo::{prelude::*, cors::Cors, hyper::Method};
 extern crate serde_json;
 use simple_logger::SimpleLogger;
@@ -60,6 +60,7 @@ async fn main() {
         .push(
             Router::with_path("api/resources/<file_name>")
                 .get(get_presigned_url_get_file)
+                .delete(delete_file)
         )
         .push(
             Router::with_path("api/resources/presigned-url/<file_name>")
@@ -77,6 +78,25 @@ async fn get_presigned_url_get_file<'a>(_req: &mut Request, _res: &mut Response)
     if _file_name.is_some() {
         match request_signed_url(_file_name.unwrap(), http::Method::GET).await {
             Ok(url) => _res.render(Redirect::permanent(url)),
+            Err(error) => {
+                _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
+                _res.render(Json(error.to_string()));
+            }
+        }
+    } else {
+        _res.render("File Name is mandatory".to_string());
+        _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
+    }
+}
+
+#[handler]
+async fn delete_file<'a>(_req: &mut Request, _res: &mut Response) {
+    let _file_name = _req.param::<String>("file_name");
+    if _file_name.is_some() {
+        match delete_object(_file_name.unwrap()).await {
+            Ok(_) => {
+                
+            },
             Err(error) => {
                 _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
                 _res.render(Json(error.to_string()));
