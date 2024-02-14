@@ -58,13 +58,17 @@ async fn main() {
     let router = Router::new()
         .hoop(cors_handler)
         .push(
-            Router::with_path("api/resources/<file_name>")
-                .get(get_presigned_url_get_file)
+            Router::with_path("api/resources/<**file_name>")
+                .get(get_resource)
                 .delete(delete_file)
         )
         .push(
-            Router::with_path("api/resources/presigned-url/<file_name>")
+            Router::with_path("api/presigned-url/<**file_name>")
                 .get(get_presigned_url_put_file)
+        )
+        .push(
+            Router::with_path("api/download-url/<**file_name>")
+                .get(get_presigned_url_download_file)
         )
     ;
     log::info!("{:#?}", router);
@@ -73,10 +77,12 @@ async fn main() {
 }
 
 #[handler]
-async fn get_presigned_url_get_file<'a>(_req: &mut Request, _res: &mut Response) {
-    let _file_name = _req.param::<String>("file_name");
+async fn get_resource<'a>(_req: &mut Request, _res: &mut Response) {
+    let _file_name = _req.param::<String>("**file_name");
+    let _seconds = _req.query::<u32>("seconds");
+    println!("Epale: {:?}", _file_name);
     if _file_name.is_some() {
-        match request_signed_url(_file_name.unwrap(), http::Method::GET).await {
+        match request_signed_url(_file_name.unwrap(), http::Method::GET, _seconds).await {
             Ok(url) => _res.render(Redirect::permanent(url)),
             Err(error) => {
                 _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
@@ -91,7 +97,7 @@ async fn get_presigned_url_get_file<'a>(_req: &mut Request, _res: &mut Response)
 
 #[handler]
 async fn delete_file<'a>(_req: &mut Request, _res: &mut Response) {
-    let _file_name = _req.param::<String>("file_name");
+    let _file_name = _req.param::<String>("**file_name");
     if _file_name.is_some() {
         match delete_object(_file_name.unwrap()).await {
             Ok(_) => {
@@ -110,9 +116,28 @@ async fn delete_file<'a>(_req: &mut Request, _res: &mut Response) {
 
 #[handler]
 async fn get_presigned_url_put_file<'a>(_req: &mut Request, _res: &mut Response) {
-    let _file_name = _req.param::<String>("file_name");
+    let _file_name = _req.param::<String>("**file_name");
+    let _seconds = _req.query::<u32>("seconds");
     if _file_name.is_some() {
-        match request_signed_url(_file_name.unwrap(), http::Method::PUT).await {
+        match request_signed_url(_file_name.unwrap(), http::Method::PUT, _seconds).await {
+            Ok(url) => _res.render(Json(url)),
+            Err(error) => {
+                _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
+                _res.render(Json(error.to_string()));
+            }
+        }
+    } else {
+        _res.render("File Name is mandatory".to_string());
+        _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
+    }
+}
+
+#[handler]
+async fn get_presigned_url_download_file<'a>(_req: &mut Request, _res: &mut Response) {
+    let _file_name = _req.param::<String>("**file_name");
+    let _seconds = _req.query::<u32>("seconds");
+    if _file_name.is_some() {
+        match request_signed_url(_file_name.unwrap(), http::Method::GET, _seconds).await {
             Ok(url) => _res.render(Json(url)),
             Err(error) => {
                 _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);

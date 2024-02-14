@@ -151,7 +151,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7878/api/resources/Image.jpeg",
+					"raw": "http://localhost:7878/api/resources/sub-folder/Image.jpeg",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -160,6 +160,7 @@
 					"path": [
 						"api",
 						"resources",
+						"sub-folder",
 						"Image.jpeg"
 					]
 				}
@@ -175,7 +176,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7878/api/resources/Image.jpeg",
+					"raw": "http://localhost:7878/api/resources/sub-folder/Image.jpeg",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -184,6 +185,7 @@
 					"path": [
 						"api",
 						"resources",
+						"sub-folder",
 						"Image.jpeg"
 					]
 				}
@@ -255,7 +257,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7878/api/resources/presigned-url/Image.jpeg",
+					"raw": "http://localhost:7878/api/presigned-url/sub-folder/Image.jpeg",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -263,9 +265,97 @@
 					"port": "7878",
 					"path": [
 						"api",
-						"resources",
 						"presigned-url",
+						"sub-folder",
 						"Image.jpeg"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Presigned Url",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7878/api/resources/presigned-url/Image.jpeg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7878",
+							"path": [
+								"api",
+								"resources",
+								"presigned-url",
+								"Image.jpeg"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "vary",
+							"value": "origin"
+						},
+						{
+							"key": "vary",
+							"value": "access-control-request-method"
+						},
+						{
+							"key": "vary",
+							"value": "access-control-request-headers"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "content-length",
+							"value": "302"
+						},
+						{
+							"key": "date",
+							"value": "Tue, 13 Feb 2024 00:57:02 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "\"http://localhost:9000/adempiere/Image.jpeg?X-Amz-SignedHeaders=host&X-Amz-Date=20240213T005702Z&X-Amz-Credential=adempiere%2F20240213%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=44add8c0cc8e1fc1e6aed9f3841a170d76bf35b0615493ebb9eab5cb9616c06a&X-Amz-Algorithm=AWS4-HMAC-SHA256\""
+				}
+			]
+		},
+		{
+			"name": "Download Url",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7878/api/download-url/sub-folder/Image.jpeg?seconds=15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7878",
+					"path": [
+						"api",
+						"download-url",
+						"sub-folder",
+						"Image.jpeg"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "15"
+						}
 					]
 				}
 			},
@@ -343,7 +433,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/adempiere/Image.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-SignedHeaders=host&X-Amz-Date=20240213T005651Z&X-Amz-Signature=960122e6ad6c802f39fed37a49bc493be053fc652d501187d9171aad39830d2f&X-Amz-Credential=adempiere%2F20240213%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800",
+					"raw": "http://localhost:9000/adempiere/sub-folder/Image.jpeg?X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=adempiere%2F20240214%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=0dc3662a45cd1c020cc6d2d61228f5e18cd52d2d842409d095bd10283268905b&X-Amz-Date=20240214T160127Z",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -351,32 +441,33 @@
 					"port": "9000",
 					"path": [
 						"adempiere",
+						"sub-folder",
 						"Image.jpeg"
 					],
 					"query": [
 						{
-							"key": "X-Amz-Algorithm",
-							"value": "AWS4-HMAC-SHA256"
+							"key": "X-Amz-Expires",
+							"value": "604800"
 						},
 						{
 							"key": "X-Amz-SignedHeaders",
 							"value": "host"
 						},
 						{
-							"key": "X-Amz-Date",
-							"value": "20240213T005651Z"
-						},
-						{
-							"key": "X-Amz-Signature",
-							"value": "960122e6ad6c802f39fed37a49bc493be053fc652d501187d9171aad39830d2f"
+							"key": "X-Amz-Algorithm",
+							"value": "AWS4-HMAC-SHA256"
 						},
 						{
 							"key": "X-Amz-Credential",
-							"value": "adempiere%2F20240213%2Fus-east-1%2Fs3%2Faws4_request"
+							"value": "adempiere%2F20240214%2Fus-east-1%2Fs3%2Faws4_request"
 						},
 						{
-							"key": "X-Amz-Expires",
-							"value": "604800"
+							"key": "X-Amz-Signature",
+							"value": "0dc3662a45cd1c020cc6d2d61228f5e18cd52d2d842409d095bd10283268905b"
+						},
+						{
+							"key": "X-Amz-Date",
+							"value": "20240214T160127Z"
 						}
 					]
 				}

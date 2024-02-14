@@ -7,7 +7,7 @@ use minio::s3::client::Client;
 use minio::s3::creds::StaticProvider;
 use minio::s3::http::BaseUrl;
 
-pub async fn request_signed_url(_file_name: String, _method: Method) -> Result<String, std::io::Error> {
+pub async fn request_signed_url(_file_name: String, _method: Method, _seconds: Option<u32>) -> Result<String, std::io::Error> {
     let _s3_url =  match env::var("S3_URL") {
         Ok(value) => value,
         Err(_) => {
@@ -53,7 +53,14 @@ pub async fn request_signed_url(_file_name: String, _method: Method) -> Result<S
 
     match args_to_match {
         Ok(value) => {
-            match client.get_presigned_object_url(&value).await {
+            let mut _presigned_parameters = value;
+            match _seconds {
+                Some(seconds) => _presigned_parameters.expiry_seconds = Some(seconds),
+                None => {
+
+                }
+            };
+            match client.get_presigned_object_url(&_presigned_parameters).await {
                 Ok(url) => Ok(url.url),
                 Err(error) => return Err(Error::new(ErrorKind::InvalidData.into(), error))
             }
