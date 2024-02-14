@@ -68,7 +68,7 @@ docker run -d -p 7878:7878 --name s3-gateway-rs -e KAFKA_ENABLED="N" -e KAFKA_QU
 
 #### Environment variables
 - `HOST`: Internal host for container. Default: `0.0.0.0:7878`
-- `ALLOWED_ORIGIN`: Define all allowed origins. Default: `*N*`
+- `ALLOWED_ORIGIN`: Define all allowed origins. Default: `*`
 - `S3_URL`: The S3 URL to connect. Default: `http://localhost:9000`
 - `BUCKET_NAME`: The bucket name created on S3 service. Default: `-` fill it.
 - `API_KEY`: API Key created on S3 service. Default: `-` fill it.
