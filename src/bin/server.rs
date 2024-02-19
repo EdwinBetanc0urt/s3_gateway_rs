@@ -1,6 +1,6 @@
 use std::env;
 use dotenv::dotenv;
-use s3_gateway_rs::controller::s3::{delete_object, request_signed_url};
+use s3_gateway_rs::controller::s3::{delete_object, request_signed_url, get_valid_file_name};
 use salvo::{prelude::*, cors::Cors, hyper::Method};
 extern crate serde_json;
 use simple_logger::SimpleLogger;
@@ -70,17 +70,50 @@ async fn main() {
             Router::with_path("api/download-url/<**file_name>")
                 .get(get_presigned_url_download_file)
         )
+        //  App Services
+        .push(
+            Router::with_path("api/<client_id>/<container_id>")
+                .push(
+                    Router::with_path("presigned-url/<file_name>")
+                        .get(get_presigned_url_put_file_container_based)
+                )
+                .push(
+                    Router::with_path("resources")
+                        .get(get_presigned_url_download_file)
+                )
+        )
     ;
     log::info!("{:#?}", router);
     let acceptor = TcpListener::new(&host).bind().await;
     Server::new(acceptor).serve(router).await;
 }
 
+// {
+//     "objects": [
+//         {
+//             "etag": "1f741da52d79ea29c13c76f62b5909e1",
+//             "is_latest": true,
+//             "last_modified": "2024-02-19T21:36:08Z",
+//             "name": "sub-folder/Hola_33.png",
+//             "size": 42924,
+//             "version_id": "null"
+//         },
+//         {
+//             "etag": "d6bf4f8ec0a58ef75b34b30bb83aa4d1",
+//             "is_latest": true,
+//             "last_modified": "2024-02-14T16:01:41Z",
+//             "name": "sub-folder/Image.jpeg",
+//             "size": 406222,
+//             "version_id": "null"
+//         }
+//     ],
+//     "total": 2
+// }
+
 #[handler]
 async fn get_resource<'a>(_req: &mut Request, _res: &mut Response) {
     let _file_name = _req.param::<String>("**file_name");
     let _seconds = _req.query::<u32>("seconds");
-    println!("Epale: {:?}", _file_name);
     if _file_name.is_some() {
         match request_signed_url(_file_name.unwrap(), http::Method::GET, _seconds).await {
             Ok(url) => _res.render(Redirect::permanent(url)),
@@ -129,6 +162,36 @@ async fn get_presigned_url_put_file<'a>(_req: &mut Request, _res: &mut Response)
     } else {
         _res.render("File Name is mandatory".to_string());
         _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
+    }
+}
+
+#[handler]
+async fn get_presigned_url_put_file_container_based<'a>(_req: &mut Request, _res: &mut Response) {
+    let _client_id = _req.param::<String>("client_id");
+    let _container_id = _req.param::<String>("container_id");
+    let _file_name = _req.param::<String>("file_name");
+    let _container_type = _req.query::<String>("container_type");
+    let _table_name = _req.query::<String>("table_name");
+    let _column_name = _req.query::<String>("column_name");
+    let _record_id = _req.query::<String>("record_id");
+    let _user_id = _req.query::<String>("user_id");
+    let _seconds = _req.query::<u32>("seconds");
+    //  Get Valid File Name
+    let _file_name_to_store = get_valid_file_name(_client_id, _container_id, _file_name, _container_type, _table_name, _column_name, _record_id, _user_id);
+    match _file_name_to_store {
+        Ok(_valid_file_name) => {
+            match request_signed_url(_valid_file_name, http::Method::PUT, _seconds).await {
+                Ok(url) => _res.render(Json(url)),
+                Err(error) => {
+                    _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
+                    _res.render(Json(error.to_string()));
+                }
+            }
+        },
+        Err(error) => {
+            _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
+            _res.render(Json(error.to_string()));
+        }
     }
 }
 
