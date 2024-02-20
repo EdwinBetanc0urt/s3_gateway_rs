@@ -143,6 +143,2264 @@
 			]
 		},
 		{
+			"name": "ADempiere Services",
+			"item": [
+				{
+					"name": "Window",
+					"item": [
+						{
+							"name": "Presigned Url (Container)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=window",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "window"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner",
+											"disabled": true
+										},
+										{
+											"key": "record_id",
+											"value": "1000012",
+											"disabled": true
+										},
+										{
+											"key": "user_id",
+											"value": "100",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=window",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "window"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner",
+													"disabled": true
+												},
+												{
+													"key": "record_id",
+													"value": "1000012",
+													"disabled": true
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "325"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:52:26 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/window-50003/image01.jpeg?X-Amz-Expires=604800&X-Amz-Signature=8012c04b90c778605a803e8eaf08286cb5ec62df656fb680fa4b3f5289a3375a&X-Amz-Date=20240219T235226Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host\""
+								}
+							]
+						},
+						{
+							"name": "Presigned Url (Container + Record ID)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=window&table_name=C_BPartner&record_id=1000012",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "window"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner"
+										},
+										{
+											"key": "record_id",
+											"value": "1000012"
+										},
+										{
+											"key": "user_id",
+											"value": "100",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=window&table_name=C_BPartner&record_id=1000012",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "window"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "344"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:52:45 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/window-50003/c_bpartner/1000012/image01.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=604800&X-Amz-Date=20240219T235245Z&X-Amz-SignedHeaders=host&X-Amz-Signature=f44b0ced232db3f6aa8b9a14019eb236d95d94dbf58e8aab725728e84c728f21&X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request\""
+								}
+							]
+						},
+						{
+							"name": "Presigned Url (Container + Column Name + Record ID)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=window&table_name=C_BPartner&record_id=1000012&column_name=logo_id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "window"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner"
+										},
+										{
+											"key": "record_id",
+											"value": "1000012"
+										},
+										{
+											"key": "column_name",
+											"value": "logo_id"
+										},
+										{
+											"key": "user_id",
+											"value": "100",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=window&table_name=C_BPartner&record_id=1000012&column_name=logo_id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "window"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "column_name",
+													"value": "logo_id"
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "352"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:53:31 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/window-50003/c_bpartner/1000012/logo_id/image01.jpeg?X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=604800&X-Amz-Date=20240219T235331Z&X-Amz-SignedHeaders=host&X-Amz-Signature=436ff40ebd8e29e91196e04d12bddf3ba790e83c9418b5dc6723026cf51e7afc\""
+								}
+							]
+						},
+						{
+							"name": "Presigned Url (User)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=window&table_name=C_BPartner&record_id=1000012&column_name=logo_id&user_id=100",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "window"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner"
+										},
+										{
+											"key": "record_id",
+											"value": "1000012"
+										},
+										{
+											"key": "column_name",
+											"value": "logo_id"
+										},
+										{
+											"key": "user_id",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=window&table_name=C_BPartner&record_id=1000012&column_name=logo_id&user_id=100",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "window"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "column_name",
+													"value": "logo_id"
+												},
+												{
+													"key": "user_id",
+													"value": "100"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "356"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:54:13 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/100/window-50003/c_bpartner/1000012/logo_id/image01.jpeg?X-Amz-SignedHeaders=host&X-Amz-Date=20240219T235413Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=604800&X-Amz-Signature=81b0556d6013f5d13583dec7833bbf6d5096c84dfe07204b92370d29cd81daf2&X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Form",
+					"item": [
+						{
+							"name": "Presigned Url (Container)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=form",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "form"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner",
+											"disabled": true
+										},
+										{
+											"key": "record_id",
+											"value": "1000012",
+											"disabled": true
+										},
+										{
+											"key": "user_id",
+											"value": "100",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=form",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "form"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner",
+													"disabled": true
+												},
+												{
+													"key": "record_id",
+													"value": "1000012",
+													"disabled": true
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "323"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:54:35 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/form-50003/image01.jpeg?X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=c8c799c77fd1633597b58b49cd108dd47a168efd8559d01dcdadd1b8510d5b07&X-Amz-Date=20240219T235435Z&X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request\""
+								}
+							]
+						},
+						{
+							"name": "Presigned Url (Container + Record ID)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=form&table_name=C_BPartner&record_id=1000012",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "form"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner"
+										},
+										{
+											"key": "record_id",
+											"value": "1000012"
+										},
+										{
+											"key": "user_id",
+											"value": "100",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=form&table_name=C_BPartner&record_id=1000012",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "form"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "342"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:55:05 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/form-50003/c_bpartner/1000012/image01.jpeg?X-Amz-Signature=7422aeac721a176b0bc61948352bfcb18ac2c5f6ca701185d8636a9f73619528&X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240219T235505Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host\""
+								}
+							]
+						},
+						{
+							"name": "Presigned Url (User)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=form&table_name=C_BPartner&record_id=1000012&user_id=100",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "form"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner"
+										},
+										{
+											"key": "record_id",
+											"value": "1000012"
+										},
+										{
+											"key": "user_id",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=form&table_name=C_BPartner&record_id=1000012&user_id=100",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "form"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "user_id",
+													"value": "100"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "346"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:55:28 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/100/form-50003/c_bpartner/1000012/image01.jpeg?X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=163538589f3a8fa56b678b536c87a39f09bd4fdbf65bab49420dd30a9bd0f16b&X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240219T235528Z&X-Amz-Algorithm=AWS4-HMAC-SHA256\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Process",
+					"item": [
+						{
+							"name": "Presigned Url (Container)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=process",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "process"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner",
+											"disabled": true
+										},
+										{
+											"key": "record_id",
+											"value": "1000012",
+											"disabled": true
+										},
+										{
+											"key": "user_id",
+											"value": "100",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=process",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "process"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner",
+													"disabled": true
+												},
+												{
+													"key": "record_id",
+													"value": "1000012",
+													"disabled": true
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "326"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:55:48 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/process-50003/image01.jpeg?X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Date=20240219T235548Z&X-Amz-SignedHeaders=host&X-Amz-Signature=0e8f68edcf1f99f2fb5995072a47f55f8266338eddb85a462bd14c38eff0fd90&X-Amz-Algorithm=AWS4-HMAC-SHA256\""
+								}
+							]
+						},
+						{
+							"name": "Presigned Url (Container + Record ID)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=process&table_name=C_BPartner&record_id=1000012",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "process"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner"
+										},
+										{
+											"key": "record_id",
+											"value": "1000012"
+										},
+										{
+											"key": "user_id",
+											"value": "100",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=process&table_name=C_BPartner&record_id=1000012",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "process"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "345"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:56:21 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/process-50003/c_bpartner/1000012/image01.jpeg?X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=94affb40e31852a6cc8a493d9930ccc4937a8c6f0654537ba6862f831c12ed48&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240219T235621Z\""
+								}
+							]
+						},
+						{
+							"name": "Presigned Url (User)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=process&table_name=C_BPartner&record_id=1000012&user_id=100",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "process"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner"
+										},
+										{
+											"key": "record_id",
+											"value": "1000012"
+										},
+										{
+											"key": "user_id",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=process&table_name=C_BPartner&record_id=1000012&user_id=100",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "process"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "user_id",
+													"value": "100"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "349"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:56:42 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/100/process-50003/c_bpartner/1000012/image01.jpeg?X-Amz-SignedHeaders=host&X-Amz-Signature=4609abfb828b525317f56fd4764332e3e09b882936ffb5486bc0204d897c8052&X-Amz-Date=20240219T235642Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Report",
+					"item": [
+						{
+							"name": "Presigned Url (Container)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=report",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "report"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner",
+											"disabled": true
+										},
+										{
+											"key": "record_id",
+											"value": "1000012",
+											"disabled": true
+										},
+										{
+											"key": "user_id",
+											"value": "100",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=report",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "report"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner",
+													"disabled": true
+												},
+												{
+													"key": "record_id",
+													"value": "1000012",
+													"disabled": true
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "325"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:57:14 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/report-50003/image01.jpeg?X-Amz-Date=20240219T235714Z&X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-SignedHeaders=host&X-Amz-Signature=7314795f1e61bc997d27e20888838b12efff39dc8c6197ec221ab6cabd63853f\""
+								}
+							]
+						},
+						{
+							"name": "Presigned Url (Container + Record ID)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=report&table_name=C_BPartner&record_id=1000012",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "report"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner"
+										},
+										{
+											"key": "record_id",
+											"value": "1000012"
+										},
+										{
+											"key": "user_id",
+											"value": "100",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=report&table_name=C_BPartner&record_id=1000012",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "report"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "344"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:57:44 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/report-50003/c_bpartner/1000012/image01.jpeg?X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=724ded5dacfe36da0e041711bdaacb6218500b02fcd4801e08f4de25a760b0c4&X-Amz-Date=20240219T235744Z&X-Amz-Expires=604800\""
+								}
+							]
+						},
+						{
+							"name": "Presigned Url (User)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=report&table_name=C_BPartner&record_id=1000012&user_id=100",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "report"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner"
+										},
+										{
+											"key": "record_id",
+											"value": "1000012"
+										},
+										{
+											"key": "user_id",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=report&table_name=C_BPartner&record_id=1000012&user_id=100",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "report"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "user_id",
+													"value": "100"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "348"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:58:07 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/100/report-50003/c_bpartner/1000012/image01.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-SignedHeaders=host&X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f4bdfb79640f96362203b005d155193315504958997fdb02b1a50b8a332f1e6d&X-Amz-Expires=604800&X-Amz-Date=20240219T235807Z\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Browser",
+					"item": [
+						{
+							"name": "Presigned Url (Container)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=browser",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "browser"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner",
+											"disabled": true
+										},
+										{
+											"key": "record_id",
+											"value": "1000012",
+											"disabled": true
+										},
+										{
+											"key": "user_id",
+											"value": "100",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=browser",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "browser"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner",
+													"disabled": true
+												},
+												{
+													"key": "record_id",
+													"value": "1000012",
+													"disabled": true
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "326"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:58:31 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/browser-50003/image01.jpeg?X-Amz-SignedHeaders=host&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=5cfe11aee0978c62459e2283edc08e06774c4b55e5aa9ff05935f24de8f3c904&X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240219T235831Z&X-Amz-Expires=604800\""
+								}
+							]
+						},
+						{
+							"name": "Presigned Url (Container + Record ID)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=browser&table_name=C_BPartner&record_id=1000012",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "browser"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner"
+										},
+										{
+											"key": "record_id",
+											"value": "1000012"
+										},
+										{
+											"key": "user_id",
+											"value": "100",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=browser&table_name=C_BPartner&record_id=1000012",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "browser"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "345"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:58:54 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/browser-50003/c_bpartner/1000012/image01.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240219T235854Z&X-Amz-Expires=604800&X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=c098075e339190d96d1137512493e7e941edf5164a5a49bbf37f29b8574053fc\""
+								}
+							]
+						},
+						{
+							"name": "Presigned Url (User)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=browser&table_name=C_BPartner&record_id=1000012&user_id=100",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"1000000",
+										"50003",
+										"presigned-url",
+										"Image 01 *.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "browser"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner"
+										},
+										{
+											"key": "record_id",
+											"value": "1000012"
+										},
+										{
+											"key": "user_id",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg?container_type=browser&table_name=C_BPartner&record_id=1000012&user_id=100",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"1000000",
+												"50003",
+												"presigned-url",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "browser"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "user_id",
+													"value": "100"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "349"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 19 Feb 2024 23:59:04 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"http://localhost:9000/adempiere/1000000/100/browser-50003/c_bpartner/1000012/image01.jpeg?X-Amz-Credential=adempiere%2F20240219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240219T235904Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e61a103daf64de58b52469e7e6b9628f49c1bb8c13341bf65a7c052a371e9a92&X-Amz-Algorithm=AWS4-HMAC-SHA256\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Presigned Url",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7878/api/1000000/50003/presigned-url/Image 01 *.jpeg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7878",
+							"path": [
+								"api",
+								"1000000",
+								"50003",
+								"presigned-url",
+								"Image 01 *.jpeg"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Presigned Url",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/resources/presigned-url/Image.jpeg",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"resources",
+										"presigned-url",
+										"Image.jpeg"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "vary",
+									"value": "origin"
+								},
+								{
+									"key": "vary",
+									"value": "access-control-request-method"
+								},
+								{
+									"key": "vary",
+									"value": "access-control-request-headers"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "302"
+								},
+								{
+									"key": "date",
+									"value": "Tue, 13 Feb 2024 00:57:02 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "\"http://localhost:9000/adempiere/Image.jpeg?X-Amz-SignedHeaders=host&X-Amz-Date=20240213T005702Z&X-Amz-Credential=adempiere%2F20240213%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=44add8c0cc8e1fc1e6aed9f3841a170d76bf35b0615493ebb9eab5cb9616c06a&X-Amz-Algorithm=AWS4-HMAC-SHA256\""
+						}
+					]
+				},
+				{
+					"name": "Upload File",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/tmp/Image.jpeg"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/adempiere/sub-folder/Image.jpeg?X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=adempiere%2F20240214%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=0dc3662a45cd1c020cc6d2d61228f5e18cd52d2d842409d095bd10283268905b&X-Amz-Date=20240214T160127Z",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"adempiere",
+								"sub-folder",
+								"Image.jpeg"
+							],
+							"query": [
+								{
+									"key": "X-Amz-Expires",
+									"value": "604800"
+								},
+								{
+									"key": "X-Amz-SignedHeaders",
+									"value": "host"
+								},
+								{
+									"key": "X-Amz-Algorithm",
+									"value": "AWS4-HMAC-SHA256"
+								},
+								{
+									"key": "X-Amz-Credential",
+									"value": "adempiere%2F20240214%2Fus-east-1%2Fs3%2Faws4_request"
+								},
+								{
+									"key": "X-Amz-Signature",
+									"value": "0dc3662a45cd1c020cc6d2d61228f5e18cd52d2d842409d095bd10283268905b"
+								},
+								{
+									"key": "X-Amz-Date",
+									"value": "20240214T160127Z"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Upload File",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "file",
+									"file": {
+										"src": "/tmp/Image.jpeg"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/adempiere/Image.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-SignedHeaders=host&X-Amz-Date=20240213T005651Z&X-Amz-Signature=960122e6ad6c802f39fed37a49bc493be053fc652d501187d9171aad39830d2f&X-Amz-Credential=adempiere%2F20240213%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"adempiere",
+										"Image.jpeg"
+									],
+									"query": [
+										{
+											"key": "X-Amz-Algorithm",
+											"value": "AWS4-HMAC-SHA256"
+										},
+										{
+											"key": "X-Amz-SignedHeaders",
+											"value": "host"
+										},
+										{
+											"key": "X-Amz-Date",
+											"value": "20240213T005651Z"
+										},
+										{
+											"key": "X-Amz-Signature",
+											"value": "960122e6ad6c802f39fed37a49bc493be053fc652d501187d9171aad39830d2f"
+										},
+										{
+											"key": "X-Amz-Credential",
+											"value": "adempiere%2F20240213%2Fus-east-1%2Fs3%2Faws4_request"
+										},
+										{
+											"key": "X-Amz-Expires",
+											"value": "604800"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Accept-Ranges",
+									"value": "bytes"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "\"d6bf4f8ec0a58ef75b34b30bb83aa4d1\""
+								},
+								{
+									"key": "Server",
+									"value": "MinIO"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Amz-Id-2",
+									"value": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8"
+								},
+								{
+									"key": "X-Amz-Request-Id",
+									"value": "17B3462CC21C527F"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Xss-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Feb 2024 00:57:21 GMT"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "Get File",
 			"request": {
 				"auth": {
