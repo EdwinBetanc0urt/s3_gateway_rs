@@ -1,6 +1,6 @@
 use std::env;
 use dotenv::dotenv;
-use s3_gateway_rs::controller::s3::{delete_object, get_list_objects, get_valid_file_name, request_signed_url};
+use s3_gateway_rs::controller::s3::{delete_object, get_list_objects, get_valid_file_name, request_signed_url, PresignedObject};
 use salvo::{prelude::*, cors::Cors, hyper::Method};
 extern crate serde_json;
 use simple_logger::SimpleLogger;
@@ -204,8 +204,11 @@ async fn get_presigned_url_put_file_container_based<'a>(_req: &mut Request, _res
     let _file_name_to_store = get_valid_file_name(_client_id, _container_id, _file_name, _container_type, _table_name, _column_name, _record_id, _user_id);
     match _file_name_to_store {
         Ok(_valid_file_name) => {
-            match request_signed_url(_valid_file_name, http::Method::PUT, _seconds).await {
-                Ok(url) => _res.render(Json(url)),
+            match request_signed_url(_valid_file_name.to_owned(), http::Method::PUT, _seconds).await {
+                Ok(url) => _res.render(Json(PresignedObject {
+                    url: Some(url),
+                    file_name: Some(_valid_file_name)
+                })),
                 Err(error) => {
                     _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
                     _res.render(Json(error.to_string()));

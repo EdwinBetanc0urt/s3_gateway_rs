@@ -146,6 +146,12 @@ pub async fn get_list_objects(_client_id: Option<String>, _container_id: Option<
 }
 
 #[derive(Serialize, Debug, Clone)]
+pub struct PresignedObject {
+    pub url: Option<String>,
+    pub file_name: Option<String>
+}
+
+#[derive(Serialize, Debug, Clone)]
 pub struct ResourceResponse {
     pub parent_folder: Option<String>,
     pub resources: Option<Vec<Resource>>
