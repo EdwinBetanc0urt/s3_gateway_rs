@@ -95,8 +95,13 @@ Server Address: "0.0.0.0:7878"
     │   └──[DELETE] -> server::delete_file
     ├──api/presigned-url/<**file_name>
     │   └──[GET] -> server::get_presigned_url_put_file
-    └──api/download-url/<**file_name>
-        └──[GET] -> server::get_presigned_url_download_file
+    ├──api/download-url/<**file_name>
+    │   └──[GET] -> server::get_presigned_url_download_file
+    └──api/<client_id>/<container_id>
+        ├──presigned-url/<file_name>
+        │   └──[GET] -> server::get_presigned_url_put_file_container_based
+        └──resources
+            └──[GET] -> server::get_resources_file_container_based
 ```
 
 # General Info
