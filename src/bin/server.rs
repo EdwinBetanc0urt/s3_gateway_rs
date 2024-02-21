@@ -175,8 +175,9 @@ async fn get_resources_file_container_based<'a>(_req: &mut Request, _res: &mut R
     let _column_name = _req.query::<String>("column_name");
     let _record_id = _req.query::<String>("record_id");
     let _user_id = _req.query::<String>("user_id");
+    let _role_id = _req.query::<String>("role_id");
     let _seconds = _req.query::<u32>("seconds");
-    let _object_list = get_list_objects(_client_id.to_owned(), _container_id.to_owned(), _container_type.to_owned(), _table_name.to_owned(), _column_name.to_owned(), _record_id.to_owned(), _user_id.to_owned()).await;
+    let _object_list = get_list_objects(_client_id.to_owned(), _container_id.to_owned(), _container_type.to_owned(), _table_name.to_owned(), _column_name.to_owned(), _record_id.to_owned(), _user_id.to_owned(), _role_id.to_owned()).await;
     match _object_list {
         Ok(_objects) => {
            _res.render(Json(_objects))
@@ -198,10 +199,11 @@ async fn get_presigned_url_put_file_container_based<'a>(_req: &mut Request, _res
     let _column_name = _req.query::<String>("column_name");
     let _record_id = _req.query::<String>("record_id");
     let _user_id = _req.query::<String>("user_id");
+    let _role_id = _req.query::<String>("role_id");
     let _seconds = _req.query::<u32>("seconds");
-    let _ = get_list_objects(_client_id.to_owned(), _container_id.to_owned(), _container_type.to_owned(), _table_name.to_owned(), _column_name.to_owned(), _record_id.to_owned(), _user_id.to_owned()).await;
+    let _ = get_list_objects(_client_id.to_owned(), _container_id.to_owned(), _container_type.to_owned(), _table_name.to_owned(), _column_name.to_owned(), _record_id.to_owned(), _user_id.to_owned(), _role_id.to_owned()).await;
     //  Get Valid File Name
-    let _file_name_to_store = get_valid_file_name(_client_id, _container_id, _file_name, _container_type, _table_name, _column_name, _record_id, _user_id);
+    let _file_name_to_store = get_valid_file_name(_client_id, _container_id, _file_name, _container_type, _table_name, _column_name, _record_id, _user_id, _role_id);
     match _file_name_to_store {
         Ok(_valid_file_name) => {
             match request_signed_url(_valid_file_name.to_owned(), http::Method::PUT, _seconds).await {
