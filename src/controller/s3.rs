@@ -79,12 +79,12 @@ fn get_valid_path(_client_id: Option<String>, _container_id: Option<String>, _co
 }
 
 fn get_valid_path_name(_value: String) -> String {
-    let regex = Regex::new(r"[^A-Za-z0-9]").unwrap();
+    let regex = Regex::new(r"[^A-Za-z0-9-]").unwrap();
     regex.replace_all(&_value, "_").to_string()
 }
 
 fn get_valid_file_path(_value: String) -> String {
-    let regex = Regex::new(r"[^A-Za-z0-9.]").unwrap();
+    let regex = Regex::new(r"[^A-Za-z0-9.-]").unwrap();
     regex.replace_all(&_value, "").to_string()
 }
 
