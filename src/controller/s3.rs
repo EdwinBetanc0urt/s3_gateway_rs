@@ -176,7 +176,7 @@ pub struct ResourceResponse {
 #[derive(Serialize, Debug, Clone)]
 pub struct Resource {
     pub name: String,
-    // pub last_modified: Option<UtcTime>,
+    pub last_modified: Option<String>,
     pub etag: Option<String>, // except DeleteMarker
     pub owner_name: Option<String>,
     pub size: Option<usize>, // except DeleteMarker
@@ -195,6 +195,10 @@ impl ResourceResponse {
             parent_folder: _data.prefix,
             resources: Some(_data.contents.iter().map(|_content| {
                 Resource { 
+                    last_modified: match _content.last_modified {
+                        Some(date) => Some(date.format("%Y-%m-%d %H:%M:%S").to_string()),
+                        None => None
+                    },
                     name: _content.to_owned().name, 
                     etag: _content.to_owned().etag, 
                     owner_name: _content.to_owned().owner_name, 
