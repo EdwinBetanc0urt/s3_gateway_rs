@@ -19,7 +19,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:7878/api/presigned-url/1000000/50003/Image 01 *.jpeg?container_type=window",
+							"raw": "http://localhost:7878/api/presigned-url/1000000/50003/Epale.mp4?container_type=window&table_name=C_BPartner&record_id=1000012",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -30,7 +30,7 @@
 								"presigned-url",
 								"1000000",
 								"50003",
-								"Image 01 *.jpeg"
+								"Epale.mp4"
 							],
 							"query": [
 								{
@@ -40,13 +40,11 @@
 								},
 								{
 									"key": "table_name",
-									"value": "C_BPartner",
-									"disabled": true
+									"value": "C_BPartner"
 								},
 								{
 									"key": "record_id",
-									"value": "1000012",
-									"disabled": true
+									"value": "1000012"
 								},
 								{
 									"key": "user_id",
@@ -965,6 +963,88 @@
 							],
 							"cookie": [],
 							"body": "\"Table Name and Record ID are Mandatory\""
+						},
+						{
+							"name": "Ok Mime Type",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/resources?container_type=window&client_id=1000000&container_id=50003&table_name=C_BPartner&record_id=1000012",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"resources"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "window",
+											"description": "Supported Values:\n - window\n - process\n - report\n - browser\n - form\n - application\n - resource"
+										},
+										{
+											"key": "client_id",
+											"value": "1000000"
+										},
+										{
+											"key": "container_id",
+											"value": "50003"
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner"
+										},
+										{
+											"key": "record_id",
+											"value": "1000012"
+										},
+										{
+											"key": "user_id",
+											"value": "100",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "vary",
+									"value": "origin"
+								},
+								{
+									"key": "vary",
+									"value": "access-control-request-method"
+								},
+								{
+									"key": "vary",
+									"value": "access-control-request-headers"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "1544"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 21 Feb 2024 22:19:35 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"parent_folder\": \"1000000/client/window/50003/c_bpartner/1000012\",\n    \"resources\": [\n        {\n            \"name\": \"1000000/client/window/50003/c_bpartner/1000012/epale.mp4\",\n            \"last_modified\": \"2024-02-21 22:19:12\",\n            \"etag\": \"\\\"d571bb996d3a288f6dcfdf87eac895fb\\\"\",\n            \"owner_name\": null,\n            \"size\": 133396096,\n            \"storage_class\": \"STANDARD\",\n            \"is_latest\": false,\n            \"version_id\": null,\n            \"user_metadata\": null,\n            \"is_prefix\": false,\n            \"is_delete_marker\": false,\n            \"encoding_type\": null,\n            \"content_type\": \"video/mp4\"\n        },\n        {\n            \"name\": \"1000000/client/window/50003/c_bpartner/1000012/image01.jpeg\",\n            \"last_modified\": \"2024-02-21 16:02:19\",\n            \"etag\": \"\\\"190e5956646a9a9281de73b9366aa668\\\"\",\n            \"owner_name\": null,\n            \"size\": 371710315,\n            \"storage_class\": \"STANDARD\",\n            \"is_latest\": false,\n            \"version_id\": null,\n            \"user_metadata\": null,\n            \"is_prefix\": false,\n            \"is_delete_marker\": false,\n            \"encoding_type\": null,\n            \"content_type\": \"image/jpeg\"\n        },\n        {\n            \"name\": \"1000000/client/window/50003/c_bpartner/1000012/imagehola.jpeg\",\n            \"last_modified\": \"2024-02-21 19:33:50\",\n            \"etag\": \"\\\"4cf34cc3b8cd466c729b71faecbf660a\\\"\",\n            \"owner_name\": null,\n            \"size\": 84237,\n            \"storage_class\": \"STANDARD\",\n            \"is_latest\": false,\n            \"version_id\": null,\n            \"user_metadata\": null,\n            \"is_prefix\": false,\n            \"is_delete_marker\": false,\n            \"encoding_type\": null,\n            \"content_type\": \"image/jpeg\"\n        },\n        {\n            \"name\": \"1000000/client/window/50003/c_bpartner/1000012/logo_id/image01.jpeg\",\n            \"last_modified\": \"2024-02-21 16:02:48\",\n            \"etag\": \"\\\"c0a7ce49e29fb795a1b2c3c84a1b7a0c\\\"\",\n            \"owner_name\": null,\n            \"size\": 5773640,\n            \"storage_class\": \"STANDARD\",\n            \"is_latest\": false,\n            \"version_id\": null,\n            \"user_metadata\": null,\n            \"is_prefix\": false,\n            \"is_delete_marker\": false,\n            \"encoding_type\": null,\n            \"content_type\": \"image/jpeg\"\n        }\n    ]\n}"
 						}
 					]
 				}
@@ -1804,11 +1884,11 @@
 				"body": {
 					"mode": "file",
 					"file": {
-						"src": "/home/yamel/Pictures/Screenshot from 2024-02-21 14-28-27.png"
+						"src": "/home/yamel/Downloads/Telegram Desktop/Fear_TWD_T_5_E12.mp4"
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/adempiere/1000000/client/resource/zfx-25648854-256/c_bpartner/1000012/image01.jpeg?X-Amz-Credential=adempiere%2F20240221%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=8a178653dfabaa3515a01435ecf9399928699f4107e6f1892505a3e1ef0915ef&X-Amz-SignedHeaders=host&X-Amz-Date=20240221T190423Z&X-Amz-Expires=604800",
+					"raw": "http://localhost:9000/adempiere/1000000/client/window/50003/c_bpartner/1000012/epale.mp4?X-Amz-SignedHeaders=host&X-Amz-Signature=a9476cb7758ef1fc2aea0ca5acf3522358c7e3ed26af382ce386f67b984a14f4&X-Amz-Credential=adempiere%2F20240221%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240221T221859Z&X-Amz-Expires=604800",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1818,13 +1898,21 @@
 						"adempiere",
 						"1000000",
 						"client",
-						"resource",
-						"zfx-25648854-256",
+						"window",
+						"50003",
 						"c_bpartner",
 						"1000012",
-						"image01.jpeg"
+						"epale.mp4"
 					],
 					"query": [
+						{
+							"key": "X-Amz-SignedHeaders",
+							"value": "host"
+						},
+						{
+							"key": "X-Amz-Signature",
+							"value": "a9476cb7758ef1fc2aea0ca5acf3522358c7e3ed26af382ce386f67b984a14f4"
+						},
 						{
 							"key": "X-Amz-Credential",
 							"value": "adempiere%2F20240221%2Fus-east-1%2Fs3%2Faws4_request"
@@ -1834,16 +1922,8 @@
 							"value": "AWS4-HMAC-SHA256"
 						},
 						{
-							"key": "X-Amz-Signature",
-							"value": "8a178653dfabaa3515a01435ecf9399928699f4107e6f1892505a3e1ef0915ef"
-						},
-						{
-							"key": "X-Amz-SignedHeaders",
-							"value": "host"
-						},
-						{
 							"key": "X-Amz-Date",
-							"value": "20240221T190423Z"
+							"value": "20240221T221859Z"
 						},
 						{
 							"key": "X-Amz-Expires",

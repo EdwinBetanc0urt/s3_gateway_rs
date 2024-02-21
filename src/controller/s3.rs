@@ -10,6 +10,7 @@ use minio::s3::http::BaseUrl;
 use minio::s3::response::ListObjectsV2Response;
 use regex::Regex;
 use serde::Serialize;
+use std::path::Path;
 
 fn get_valid_path(_client_id: Option<String>, _container_id: Option<String>, _container_type: Option<String>, _table_name: Option<String>, _column_name: Option<String>, _record_id: Option<String>, _user_id: Option<String>, _role_id: Option<String>, _include_access: bool) -> Result<String, std::io::Error> {
     if _client_id.to_owned().is_none() {
@@ -187,6 +188,7 @@ pub struct Resource {
     pub is_prefix: bool,
     pub is_delete_marker: bool,
     pub encoding_type: Option<String>,
+    pub content_type: Option<String>,
 }
 
 impl ResourceResponse {
@@ -194,12 +196,14 @@ impl ResourceResponse {
         ResourceResponse {
             parent_folder: _data.prefix,
             resources: Some(_data.contents.iter().map(|_content| {
+                let _file_name = _content.to_owned().name;
+                let _content_type = mime_guess::from_path(Path::new(&_file_name)).first_or_octet_stream();
                 Resource { 
                     last_modified: match _content.last_modified {
                         Some(date) => Some(date.format("%Y-%m-%d %H:%M:%S").to_string()),
                         None => None
                     },
-                    name: _content.to_owned().name, 
+                    name: _file_name, 
                     etag: _content.to_owned().etag, 
                     owner_name: _content.to_owned().owner_name, 
                     size: _content.size, 
@@ -209,7 +213,8 @@ impl ResourceResponse {
                     user_metadata: _content.to_owned().user_metadata,
                     is_prefix: _content.is_prefix, 
                     is_delete_marker: _content.is_delete_marker, 
-                    encoding_type: _content.to_owned().encoding_type 
+                    encoding_type: _content.to_owned().encoding_type,
+                    content_type: Some(_content_type.to_string())
                 }
             }).collect::<Vec<Resource>>()),
         }
