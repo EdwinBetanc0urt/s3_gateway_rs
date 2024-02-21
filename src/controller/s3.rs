@@ -30,8 +30,13 @@ fn get_valid_path(_client_id: Option<String>, _container_id: Option<String>, _co
     if _column_name.to_owned().is_some() && _table_name.to_owned().is_none() {
         return Err(Error::new(ErrorKind::InvalidData.into(), "Table Name is Mandatory"))
     }
-    if !matches!(_container_type.clone().unwrap().as_ref(), "window" | "process" | "report" | "browser" | "form") {
+    if !matches!(_container_type.clone().unwrap().as_ref(), "window" | "process" | "report" | "browser" | "form" | "application" | "resource") {
         return Err(Error::new(ErrorKind::InvalidData.into(), "Invalid Container Type"))
+    }
+    if _table_name.is_none() || _record_id.is_none() {
+        if !matches!(_container_type.clone().unwrap().as_ref(), "application" | "resource") {
+            return Err(Error::new(ErrorKind::InvalidData.into(), "Invalid Container Type (Mandatory Record ID and Table Name)"))
+        }
     }
     //  Client
     let mut _folder = get_valid_path_name(_client_id.to_owned().unwrap());
@@ -39,16 +44,23 @@ fn get_valid_path(_client_id: Option<String>, _container_id: Option<String>, _co
     //  Validate if is private access
     if _include_access && (_user_id.is_some() || _role_id.is_some()) {
         if _user_id.is_some() {
+            _folder.push_str("user");
+            _folder.push_str("/");
             _folder.push_str(&get_valid_path_name(_user_id.unwrap()));
         } else {
+            _folder.push_str("role");
+            _folder.push_str("/");
             _folder.push_str(&get_valid_path_name(_role_id.unwrap()));
         }
-        _folder.push_str("/");    
+        _folder.push_str("/");
+    } else {
+        _folder.push_str("client");
+        _folder.push_str("/");
     }
     //  Container
     //  Continer Type
     _folder.push_str(&get_valid_path_name(_container_type.unwrap()));
-    _folder.push_str("-");
+    _folder.push_str("/");
     _folder.push_str(&get_valid_path_name(_container_id.unwrap()));
     //  Table Name
     if _table_name.to_owned().is_some() {
@@ -135,7 +147,7 @@ pub async fn get_list_objects(_client_id: Option<String>, _container_id: Option<
         Ok(_folder_name) => Some(_folder_name),
         Err(error) => {
             log::warn!("Error Getting path {:?}", error);
-            Some("".to_owned())
+            return Err(Error::new(ErrorKind::InvalidData.into(), error))
         }
     };
     let mut _args = ListObjectsV2Args::new(&_bucket_name).unwrap();

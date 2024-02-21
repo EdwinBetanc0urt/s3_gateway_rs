@@ -58,28 +58,23 @@ async fn main() {
     let router = Router::new()
         .hoop(cors_handler)
         .push(
-            Router::with_path("api/resources/<**file_name>")
-                .get(get_resource)
-                .delete(delete_file)
-        )
-        .push(
-            Router::with_path("api/presigned-url/<**file_name>")
-                .get(get_presigned_url_put_file)
-        )
-        .push(
-            Router::with_path("api/download-url/<**file_name>")
-                .get(get_presigned_url_download_file)
-        )
-        //  App Services
-        .push(
-            Router::with_path("api/<client_id>/<container_id>")
+            Router::with_path("api")
                 .push(
-                    Router::with_path("presigned-url/<file_name>")
-                        .get(get_presigned_url_put_file_container_based)
+                Router::with_path("resources")
+                            .get(get_resources_file_container_based)
+                            .push(
+                            Router::with_path("<**file_name>")
+                                        .get(get_resource)
+                                        .delete(delete_resource)
+                            )
                 )
                 .push(
-                    Router::with_path("resources")
-                        .get(get_resources_file_container_based)
+                Router::with_path("download-url/<**file_name>")
+                            .get(get_presigned_url_download_file)
+                )
+                .push(
+                Router::with_path("presigned-url/<client_id>/<container_id>/<file_name>")
+                        .get(get_presigned_url_put_file_container_based)
                 )
         )
     ;
@@ -87,28 +82,6 @@ async fn main() {
     let acceptor = TcpListener::new(&host).bind().await;
     Server::new(acceptor).serve(router).await;
 }
-
-// {
-//     "objects": [
-//         {
-//             "etag": "1f741da52d79ea29c13c76f62b5909e1",
-//             "is_latest": true,
-//             "last_modified": "2024-02-19T21:36:08Z",
-//             "name": "sub-folder/Hola_33.png",
-//             "size": 42924,
-//             "version_id": "null"
-//         },
-//         {
-//             "etag": "d6bf4f8ec0a58ef75b34b30bb83aa4d1",
-//             "is_latest": true,
-//             "last_modified": "2024-02-14T16:01:41Z",
-//             "name": "sub-folder/Image.jpeg",
-//             "size": 406222,
-//             "version_id": "null"
-//         }
-//     ],
-//     "total": 2
-// }
 
 #[handler]
 async fn get_resource<'a>(_req: &mut Request, _res: &mut Response) {
@@ -129,7 +102,7 @@ async fn get_resource<'a>(_req: &mut Request, _res: &mut Response) {
 }
 
 #[handler]
-async fn delete_file<'a>(_req: &mut Request, _res: &mut Response) {
+async fn delete_resource<'a>(_req: &mut Request, _res: &mut Response) {
     let _file_name = _req.param::<String>("**file_name");
     if _file_name.is_some() {
         match delete_object(_file_name.unwrap()).await {
@@ -148,27 +121,9 @@ async fn delete_file<'a>(_req: &mut Request, _res: &mut Response) {
 }
 
 #[handler]
-async fn get_presigned_url_put_file<'a>(_req: &mut Request, _res: &mut Response) {
-    let _file_name = _req.param::<String>("**file_name");
-    let _seconds = _req.query::<u32>("seconds");
-    if _file_name.is_some() {
-        match request_signed_url(_file_name.unwrap(), http::Method::PUT, _seconds).await {
-            Ok(url) => _res.render(Json(url)),
-            Err(error) => {
-                _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
-                _res.render(Json(error.to_string()));
-            }
-        }
-    } else {
-        _res.render("File Name is mandatory".to_string());
-        _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
-    }
-}
-
-#[handler]
 async fn get_resources_file_container_based<'a>(_req: &mut Request, _res: &mut Response) {
-    let _client_id = _req.param::<String>("client_id");
-    let _container_id = _req.param::<String>("container_id");
+    let _client_id = _req.query::<String>("client_id");
+    let _container_id = _req.query::<String>("container_id");
     let _file_name = _req.param::<String>("file_name");
     let _container_type = _req.query::<String>("container_type");
     let _table_name = _req.query::<String>("table_name");
