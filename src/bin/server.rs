@@ -1,7 +1,7 @@
 use std::env;
 use dotenv::dotenv;
 use s3_gateway_rs::controller::s3::{delete_object, get_list_objects, get_valid_file_name, request_signed_url, PresignedObject};
-use salvo::{prelude::*, cors::Cors, hyper::Method};
+use salvo::{prelude::*, cors::Cors, http::header, hyper::Method};
 extern crate serde_json;
 use simple_logger::SimpleLogger;
 
