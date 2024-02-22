@@ -1,7 +1,7 @@
 use std::env;
 use dotenv::dotenv;
 use s3_gateway_rs::controller::s3::{delete_object, get_list_objects, get_valid_file_name, request_signed_url, PresignedObject};
-use salvo::{prelude::*, cors::Cors, hyper::Method};
+use salvo::{prelude::*, cors::Cors, http::header, hyper::Method};
 extern crate serde_json;
 use simple_logger::SimpleLogger;
 
@@ -16,7 +16,8 @@ async fn main() {
             "127.0.0.1:7878".to_owned()
         }.to_owned(),
     };
-    let allowed_origin =  match env::var("ALLOWED_ORIGIN") {
+    // TODO: Add support to allow requests from multiple origin
+    let allowed_origin = match env::var("ALLOWED_ORIGIN") {
         Ok(value) => value,
         Err(_) => {
             log::info!("Variable `ALLOWED_ORIGIN` Not found from enviroment");
@@ -52,28 +53,37 @@ async fn main() {
         }.to_owned(),
     };
     log::info!("Server Address: {:?}", host.clone());
+
     let cors_handler = Cors::new()
-    .allow_origin(&allowed_origin.to_owned())
-    .allow_methods(vec![Method::OPTIONS, Method::GET, Method::DELETE]).into_handler();
+        .allow_origin(&allowed_origin.to_owned())
+        .allow_methods(vec![Method::OPTIONS, Method::GET])
+        .allow_headers(vec![header::ACCESS_CONTROL_REQUEST_METHOD, header::ACCESS_CONTROL_REQUEST_HEADERS, header::AUTHORIZATION])
+        .into_handler()
+    ;
+    // TODO: Add generic ok response to OPTIONS http method
     let router = Router::new()
         .hoop(cors_handler)
         .push(
             Router::with_path("api")
                 .push(
-                Router::with_path("resources")
-                            .get(get_resources_file_container_based)
-                            .push(
+                    Router::with_path("resources")
+                        .options(get_resources_file_container_based)
+                        .get(get_resources_file_container_based)
+                        .push(
                             Router::with_path("<**file_name>")
-                                        .get(get_resource)
-                                        .delete(delete_resource)
-                            )
+                                .options(get_resource)
+                                .get(get_resource)
+                                .delete(delete_resource)
+                        )
                 )
                 .push(
-                Router::with_path("download-url/<**file_name>")
-                            .get(get_presigned_url_download_file)
+                    Router::with_path("download-url/<**file_name>")
+                        .options(get_presigned_url_download_file)
+                        .get(get_presigned_url_download_file)
                 )
                 .push(
-                Router::with_path("presigned-url/<client_id>/<container_id>/<file_name>")
+                    Router::with_path("presigned-url/<client_id>/<container_id>/<file_name>")
+                        .options(get_presigned_url_put_file_container_based)
                         .get(get_presigned_url_put_file_container_based)
                 )
         )
