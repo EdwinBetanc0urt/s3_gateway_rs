@@ -3,7 +3,7 @@ version: "3.9"
 name: services-s3-gateway
 
 services:
-  s3.service:
+  s3.storage:
     image: ${S3_IMAGE}
     container_name: ${S3_HOST}
     restart: ${GENERIC_RESTART}
@@ -32,21 +32,23 @@ services:
     image: ${S3_CLIENT_IMAGE}
     container_name: ${S3_CLIENT_HOST}
     depends_on:
-      s3.service:
+      s3.storage:
         condition: service_healthy
     entrypoint: >
       /bin/sh -c "
-      /usr/bin/mc alias set s3_minio_server http://s3.service:9000 ${S3_CLIENT_ACCESS_KEY} ${S3_CLIENT_SECRET_KEY};
+      /usr/bin/mc alias set s3_minio_server http://s3.storage:9000 ${S3_CLIENT_ACCESS_KEY} ${S3_CLIENT_SECRET_KEY};
       /usr/bin/mc mb s3_minio_server/${S3_CLIENT_BUCKET_NAME} || true;
       exit 0;
       "
     networks:
       - shared_network
 
+
+
 networks:
   shared_network:
     name: ${DEFAULT_NETWORK}
-     
+
 volumes:
   volume_s3:
     name: ${S3_VOLUME}
