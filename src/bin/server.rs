@@ -1,7 +1,7 @@
 use std::env;
 use dotenv::dotenv;
 use s3_gateway_rs::controller::s3::{delete_object, get_list_objects, get_valid_file_name, request_signed_url, PresignedObject};
-use salvo::{prelude::*, cors::Cors, http::header, hyper::Method};
+use salvo::{conn::tcp::TcpAcceptor, cors::Cors, http::header, hyper::Method, prelude::*};
 extern crate serde_json;
 use simple_logger::SimpleLogger;
 
@@ -9,13 +9,19 @@ use simple_logger::SimpleLogger;
 async fn main() {
     dotenv().ok();
     SimpleLogger::new().env().init().unwrap();
-    let host =  match env::var("HOST") {
+
+	let port: String = match env::var("PORT") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `HOST` Not found from enviroment, loaded from local IP");
-            "127.0.0.1:7878".to_owned()
-        }.to_owned(),
-    };
+			log::info!("Variable `PORT` Not found from enviroment, as default 7878");
+			"7878".to_owned()
+		}.to_owned()
+	};
+
+	let host: String = "0.0.0.0:".to_owned() + &port;
+	log::info!("Server Address: {:?}", host.clone());
+	let acceptor: TcpAcceptor = TcpListener::new(&host).bind().await;
+
     // TODO: Add support to allow requests from multiple origin
     let allowed_origin = match env::var("ALLOWED_ORIGIN") {
         Ok(value) => value,
@@ -52,8 +58,8 @@ async fn main() {
             "".to_owned()
         }.to_owned(),
     };
-    log::info!("Server Address: {:?}", host.clone());
 
+	//  Send Device Info
     let cors_handler = Cors::new()
         .allow_origin(&allowed_origin.to_owned())
         .allow_methods(vec![Method::OPTIONS, Method::GET, Method::DELETE])
@@ -89,7 +95,7 @@ async fn main() {
         )
     ;
     log::info!("{:#?}", router);
-    let acceptor = TcpListener::new(&host).bind().await;
+
     Server::new(acceptor).serve(router).await;
 }
 

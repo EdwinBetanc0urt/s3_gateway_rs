@@ -1,7 +1,7 @@
-FROM rust:1.75.0-bullseye as builder
+FROM rust:1.77.1-bullseye as builder
 
-LABEL maintainer="ysenih@erpya.com" \
-	description="A Image for start service from rust binary"
+LABEL maintainer="ysenih@erpya.com; EdwinBetanc0urt@outlook.com;" \
+	description="API RESTful with rust to manage Resources/Files/Images with S3;"
 
 WORKDIR /opt/apps/server
 
@@ -15,11 +15,12 @@ FROM debian:bullseye
 
 ENV \
     RUST_LOG="info" \
+	PORT="7878" \
+	ALLOWED_ORIGIN="*" \
     S3_URL="-" \
     BUCKET_NAME="-" \
     API_KEY="-" \
     SECRET_KEY="-" \
-    ALLOWED_ORIGIN="*"  \
     TZ="America/Caracas"
 
 COPY --from=builder /usr/local/cargo/bin/server /usr/local/bin/server
@@ -32,6 +33,7 @@ RUN apt-get update && \
     apt-get install -y pkg-config openssl libssl-dev tzdata && \
     rm -rf /var/lib/apt/lists/* && \
     sed -i "s|info|$RUST_LOG|g" /opt/apps/server/.env && \
+	sed -i "s|7878|$PORT|g" /opt/apps/server/.env && \
     sed -i "s|allowed_origin|$ALLOWED_ORIGIN|g" /opt/apps/server/.env && \
     sed -i "s|s3_url|$S3_URL|g" /opt/apps/server/.env && \
     sed -i "s|bucket_name|$BUCKET_NAME|g" /opt/apps/server/.env && \
