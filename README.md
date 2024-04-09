@@ -67,13 +67,13 @@ docker run -d -p 7878:7878 --name s3-gateway-rs -e KAFKA_ENABLED="N" -e KAFKA_QU
 ```
 
 #### Environment variables
-- `HOST`: Internal host for container. Default: `0.0.0.0:7878`
-- `ALLOWED_ORIGIN`: Define all allowed origins. Default: `*`
+- `PORT`: Internal port for container. Default: `7878`.
+- `ALLOWED_ORIGIN`: Define all allowed origins. Default: `*`.
 - `S3_URL`: The S3 URL to connect. Default: `http://localhost:9000`
 - `BUCKET_NAME`: The bucket name created on S3 service. Default: `-` fill it.
 - `API_KEY`: API Key created on S3 service. Default: `-` fill it.
 - `SECRET_KEY`: Secret Key created on S3 service. Default: `-` fill it.
-- `RUST_LOG`: The log level for service. Default `info`
+- `RUST_LOG`: The log level for service. Default `info`.
 - `TZ`: (Time Zone) Indicates the time zone to set in the nginx-based container, the default value is `America/Caracas` (UTC -4:00).
 
 ### Running project
@@ -92,13 +92,17 @@ Server Address: "0.0.0.0:7878"
 └──!NULL!
     └──api
         ├──resources
+        │   ├──[OPTIONS] -> server::get_resources_file_container_based
         │   ├──[GET] -> server::get_resources_file_container_based
         │   └──<**file_name>
+        │       ├──[OPTIONS] -> server::get_resource
         │       ├──[GET] -> server::get_resource
         │       └──[DELETE] -> server::delete_resource
         ├──download-url/<**file_name>
+        │   ├──[OPTIONS] -> server::get_presigned_url_download_file
         │   └──[GET] -> server::get_presigned_url_download_file
         └──presigned-url/<client_id>/<container_id>/<file_name>
+            ├──[OPTIONS] -> server::get_presigned_url_put_file_container_based
             └──[GET] -> server::get_presigned_url_put_file_container_based
 ```
 
