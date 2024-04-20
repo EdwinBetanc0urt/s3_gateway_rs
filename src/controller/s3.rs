@@ -135,8 +135,20 @@ pub async fn get_list_objects(_client_id: Option<String>, _container_id: Option<
             "".to_owned()
         }.to_owned(),
     };
-    let mut _base_url: BaseUrl = BaseUrl::from_str(&_s3_url).expect("Error with url");
-    _base_url.https = false;
+    let _manage_https =  match env::var("MANAGE_HTTPS") {
+        Ok(value) => {
+            value.eq("Y")
+        },
+        Err(_) => {
+            log::info!("Variable `MANAGE_HTTPS` Not found");
+            false
+        },
+    };
+    let mut _base_url: BaseUrl = match BaseUrl::from_str(&_s3_url) {
+        Ok(url) => url,
+        Err(error) => return Err(Error::new(ErrorKind::InvalidData.into(), error)),
+    };
+    _base_url.https = _manage_https;
 
     let static_provider: StaticProvider = StaticProvider::new(
         &_api_key, 
@@ -251,15 +263,26 @@ pub async fn request_signed_url(_file_name: String, _method: Method, _seconds: O
             "".to_owned()
         }.to_owned(),
     };
-    let mut _base_url: BaseUrl = BaseUrl::from_str(&_s3_url).expect("Error with url");
-    _base_url.https = false;
-
+    let _manage_https =  match env::var("MANAGE_HTTPS") {
+        Ok(value) => {
+            value.eq("Y")
+        },
+        Err(_) => {
+            log::info!("Variable `MANAGE_HTTPS` Not found");
+            false
+        },
+    };
+    let mut _base_url: BaseUrl = match BaseUrl::from_str(&_s3_url) {
+        Ok(url) => url,
+        Err(error) => return Err(Error::new(ErrorKind::InvalidData.into(), error)),
+    };
+    _base_url.https = _manage_https;
+    
     let static_provider: StaticProvider = StaticProvider::new(
         &_api_key, 
         &_secret_key, None);
 
     let client = Client::new(_base_url.clone(), Some(Box::new(static_provider)), None, None).unwrap();
-
     let args_to_match = GetPresignedObjectUrlArgs::new(
         &_bucket_name,
         _file_name.as_str(),
@@ -313,8 +336,20 @@ pub async fn delete_object(_file_name: String) -> Result<(), std::io::Error> {
             "".to_owned()
         }.to_owned(),
     };
-    let mut _base_url: BaseUrl = BaseUrl::from_str(&_s3_url).expect("Error with url");
-    _base_url.https = false;
+    let _manage_https =  match env::var("MANAGE_HTTPS") {
+        Ok(value) => {
+            value.eq("Y")
+        },
+        Err(_) => {
+            log::info!("Variable `MANAGE_HTTPS` Not found");
+            false
+        },
+    };
+    let mut _base_url: BaseUrl = match BaseUrl::from_str(&_s3_url) {
+        Ok(url) => url,
+        Err(error) => return Err(Error::new(ErrorKind::InvalidData.into(), error)),
+    };
+    _base_url.https = _manage_https;
 
     let static_provider: StaticProvider = StaticProvider::new(
         &_api_key, 

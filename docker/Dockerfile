@@ -21,6 +21,7 @@ ENV \
     BUCKET_NAME="-" \
     API_KEY="-" \
     SECRET_KEY="-" \
+    MANAGE_HTTPS="N" \
     TZ="America/Caracas"
 
 COPY --from=builder /usr/local/cargo/bin/server /usr/local/bin/server
@@ -38,7 +39,8 @@ RUN apt-get update && \
     sed -i "s|s3_url|$S3_URL|g" /opt/apps/server/.env && \
     sed -i "s|bucket_name|$BUCKET_NAME|g" /opt/apps/server/.env && \
     sed -i "s|api_key|$API_KEY|g" /opt/apps/server/.env && \
-    sed -i "s|secret_key|$SECRET_KEY|g" /opt/apps/server/.env
+    sed -i "s|secret_key|$SECRET_KEY|g" /opt/apps/server/.env \
+    sed -i "s|manage_https|$MANAGE_HTTPS|g" /opt/apps/server/.env
 
 RUN addgroup adempiere && \
 	adduser --disabled-password --gecos "" --ingroup adempiere --no-create-home adempiere && \
