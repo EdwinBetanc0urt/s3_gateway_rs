@@ -63,7 +63,7 @@ docker build -t s3-gateway-rs -f docker/Dockerfile .
 After build just run it
 
 ```bash
-docker run -d -p 7878:7878 --name s3-gateway-rs -e KAFKA_ENABLED="N" -e KAFKA_QUEUES="menu" -e KAFKA_HOST="0.0.0.0:29092" -e KAFKA_GROUP="default" -e OPENSEARCH_URL="http://localhost:9200" s3-gateway-rs
+docker run -d -p 7878:7878 --name s3-gateway-rs -e S3_URL="http://localhost:9000" -e BUCKET_NAME="adempiere" -e API_KEY="adempiere" -e SECRET_KEY="adempiere" -e MANAGE_HTTPS="N" s3-gateway-rs
 ```
 
 #### Environment variables
@@ -73,6 +73,7 @@ docker run -d -p 7878:7878 --name s3-gateway-rs -e KAFKA_ENABLED="N" -e KAFKA_QU
 - `BUCKET_NAME`: The bucket name created on S3 service. Default: `-` fill it.
 - `API_KEY`: API Key created on S3 service. Default: `-` fill it.
 - `SECRET_KEY`: Secret Key created on S3 service. Default: `-` fill it.
+- `MANAGE_HTTPS`: Determine if use https, note that this flag is `Y` or `N`. Default: `N`
 - `RUST_LOG`: The log level for service. Default `info`.
 - `TZ`: (Time Zone) Indicates the time zone to set in the nginx-based container, the default value is `America/Caracas` (UTC -4:00).
 
