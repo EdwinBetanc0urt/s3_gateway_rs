@@ -144,17 +144,27 @@ pub async fn get_list_objects(_client_id: Option<String>, _container_id: Option<
             false
         },
     };
+    let _ssl_cert_file =  match env::var("SSL_CERT_FILE") {
+        Ok(value) => value,
+        Err(_) => {
+            log::info!("Variable `SSL_CERT_FILE` Not found");
+            "".to_owned()
+        }.to_owned(),
+    };
     let mut _base_url: BaseUrl = match BaseUrl::from_str(&_s3_url) {
         Ok(url) => url,
         Err(error) => return Err(Error::new(ErrorKind::InvalidData.into(), error)),
     };
     _base_url.https = _manage_https;
-
+    let _cert_file_path= match _manage_https {
+        true => Some(Path::new(&_ssl_cert_file)),
+        false => None,
+    };
     let static_provider: StaticProvider = StaticProvider::new(
         &_api_key, 
         &_secret_key, None);
 
-    let client = Client::new(_base_url.clone(), Some(Box::new(static_provider)), None, None).unwrap();
+    let client = Client::new(_base_url.clone(), Some(Box::new(static_provider)), _cert_file_path, None).unwrap();
     let _value = get_valid_path(_client_id, _container_id, _container_type, _table_name, _column_name, _record_id, _user_id, _role_id, true);
     let _prefix = match _value {
         Ok(_folder_name) => Some(_folder_name),
@@ -272,17 +282,27 @@ pub async fn request_signed_url(_file_name: String, _method: Method, _seconds: O
             false
         },
     };
+    let _ssl_cert_file =  match env::var("SSL_CERT_FILE") {
+        Ok(value) => value,
+        Err(_) => {
+            log::info!("Variable `SSL_CERT_FILE` Not found");
+            "".to_owned()
+        }.to_owned(),
+    };
     let mut _base_url: BaseUrl = match BaseUrl::from_str(&_s3_url) {
         Ok(url) => url,
         Err(error) => return Err(Error::new(ErrorKind::InvalidData.into(), error)),
     };
     _base_url.https = _manage_https;
-    
+    let _cert_file_path= match _manage_https {
+        true => Some(Path::new(&_ssl_cert_file)),
+        false => None,
+    };
     let static_provider: StaticProvider = StaticProvider::new(
         &_api_key, 
         &_secret_key, None);
 
-    let client = Client::new(_base_url.clone(), Some(Box::new(static_provider)), None, None).unwrap();
+    let client = Client::new(_base_url.clone(), Some(Box::new(static_provider)), _cert_file_path, None).unwrap();
     let args_to_match = GetPresignedObjectUrlArgs::new(
         &_bucket_name,
         _file_name.as_str(),
@@ -345,17 +365,27 @@ pub async fn delete_object(_file_name: String) -> Result<(), std::io::Error> {
             false
         },
     };
+    let _ssl_cert_file =  match env::var("SSL_CERT_FILE") {
+        Ok(value) => value,
+        Err(_) => {
+            log::info!("Variable `SSL_CERT_FILE` Not found");
+            "".to_owned()
+        }.to_owned(),
+    };
     let mut _base_url: BaseUrl = match BaseUrl::from_str(&_s3_url) {
         Ok(url) => url,
         Err(error) => return Err(Error::new(ErrorKind::InvalidData.into(), error)),
     };
     _base_url.https = _manage_https;
-
+    let _cert_file_path= match _manage_https {
+        true => Some(Path::new(&_ssl_cert_file)),
+        false => None,
+    };
     let static_provider: StaticProvider = StaticProvider::new(
         &_api_key, 
         &_secret_key, None);
 
-    let client = Client::new(_base_url.clone(), Some(Box::new(static_provider)), None, None).unwrap();
+    let client = Client::new(_base_url.clone(), Some(Box::new(static_provider)), _cert_file_path, None).unwrap();
 
     let args_to_match = RemoveObjectArgs::new(
         &_bucket_name,

@@ -74,6 +74,7 @@ docker run -d -p 7878:7878 --name s3-gateway-rs -e S3_URL="http://localhost:9000
 - `API_KEY`: API Key created on S3 service. Default: `-` fill it.
 - `SECRET_KEY`: Secret Key created on S3 service. Default: `-` fill it.
 - `MANAGE_HTTPS`: Determine if use https, note that this flag is `Y` or `N`. Default: `N`
+- `SSL_CERT_FILE`: File path to Cert File, use this if the `MANAGE_HTTPS` is enabled. Default: `/opt/apps/server/cacert.pem`
 - `RUST_LOG`: The log level for service. Default `info`.
 - `TZ`: (Time Zone) Indicates the time zone to set in the nginx-based container, the default value is `America/Caracas` (UTC -4:00).
 
@@ -108,6 +109,23 @@ Server Address: "0.0.0.0:7878"
 ```
 
 # General Info
+
+## Using SSL
+
+A test case to connect with a S3 service using SSL connection like Digital Ocean can be running with follow commands:
+
+### Download Certificate
+
+The SSL connection is supported but you must implement your own certificate or download any like this:
+```Shell
+curl -o cacert.pem https://curl.se/ca/cacert.pem
+```
+
+### Running Container
+```Shell
+docker run -d -p 7878:7878 --name do-s3-gateway-rs -e S3_URL="nyc3.digitaloceanspaces.com" -e BUCKET_NAME="shift" -e API_KEY="<Your_API_Key>" -e SECRET_KEY="<Your_Secret_Key>" -e MANAGE_HTTPS="Y" -e SSL_CERT_FILE="<Internal_Cert_Path>" -v <Local_Cert_Path>:<Internal_Cert_Path> do-s3-gateway-rs
+```
+
 
 ## Testing OpenSearch
 

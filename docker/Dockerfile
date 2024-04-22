@@ -22,6 +22,7 @@ ENV \
     API_KEY="-" \
     SECRET_KEY="-" \
     MANAGE_HTTPS="N" \
+    SSL_CERT_FILE="/opt/apps/server/cacert.pem" \
     TZ="America/Caracas"
 
 COPY --from=builder /usr/local/cargo/bin/server /usr/local/bin/server
@@ -40,6 +41,7 @@ RUN apt-get update && \
     sed -i "s|bucket_name|$BUCKET_NAME|g" /opt/apps/server/.env && \
     sed -i "s|api_key|$API_KEY|g" /opt/apps/server/.env && \
     sed -i "s|secret_key|$SECRET_KEY|g" /opt/apps/server/.env && \
+    sed -i "s|ssl_cert_file|$SSL_CERT_FILE|g" /opt/apps/server/.env && \
     sed -i "s|manage_https|$MANAGE_HTTPS|g" /opt/apps/server/.env
 
 RUN addgroup adempiere && \
