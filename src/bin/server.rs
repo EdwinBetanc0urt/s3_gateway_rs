@@ -3,6 +3,7 @@ use dotenv::dotenv;
 use s3_gateway_rs::controller::s3::{delete_object, get_list_objects, get_valid_file_name, request_signed_url, PresignedObject};
 use salvo::{conn::tcp::TcpAcceptor, cors::Cors, http::header, hyper::Method, prelude::*};
 extern crate serde_json;
+use serde::Serialize;
 use simple_logger::SimpleLogger;
 
 #[tokio::main]
@@ -26,35 +27,35 @@ async fn main() {
     let allowed_origin = match env::var("ALLOWED_ORIGIN") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `ALLOWED_ORIGIN` Not found from enviroment");
+			log::warn!("Variable `ALLOWED_ORIGIN` Not found from enviroment");
             "*".to_owned()
         }.to_owned(),
     };
     let _s3_url =  match env::var("S3_URL") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `S3_URL` Not found");
+			log::warn!("Variable `S3_URL` Not found");
             "".to_owned()
         }.to_owned(),
     };
     let _bucket_name =  match env::var("BUCKET_NAME") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `BUCKET_NAME` Not found");
+			log::warn!("Variable `BUCKET_NAME` Not found");
             "".to_owned()
         }.to_owned(),
     };
     let _api_key =  match env::var("API_KEY") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `API_KEY` Not found");
+			log::warn!("Variable `API_KEY` Not found");
             "".to_owned()
         }.to_owned(),
     };
     let _secret_key =  match env::var("SECRET_KEY") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `SECRET_KEY` Not found");
+			log::warn!("Variable `SECRET_KEY` Not found");
             "".to_owned()
         }.to_owned(),
     };
@@ -73,30 +74,49 @@ async fn main() {
             Router::with_path("api")
                 .push(
                     Router::with_path("resources")
-                        .options(get_resources_file_container_based)
+						.options(options_response)
                         .get(get_resources_file_container_based)
                         .push(
                             Router::with_path("<**file_name>")
-                                .options(get_resource)
+								.options(options_response)
                                 .get(get_resource)
                                 .delete(delete_resource)
                         )
                 )
                 .push(
                     Router::with_path("download-url/<**file_name>")
-                        .options(get_presigned_url_download_file)
+						.options(options_response)
                         .get(get_presigned_url_download_file)
                 )
                 .push(
-                    Router::with_path("presigned-url/<client_id>/<container_id>/<file_name>")
-                        .options(get_presigned_url_put_file_container_based)
-                        .get(get_presigned_url_put_file_container_based)
-                )
+					Router::with_path("presigned-url/<client_id>")
+						.push(
+							Router::with_path("<file_name>")
+								.options(options_response)
+								.get(get_presigned_url_put_file_container_based)
+						)
+						.push(
+							Router::with_path("<container_id>/<file_name>")
+								.options(options_response)
+								.get(get_presigned_url_put_file_container_based)
+						)
+				)
         )
     ;
     log::info!("{:#?}", router);
 
     Server::new(acceptor).serve(router).await;
+}
+
+#[handler]
+async fn options_response<'a>(_req: &mut Request, _res: &mut Response) {
+	_res.status_code(StatusCode::NO_CONTENT);
+}
+
+#[derive(Serialize)]
+struct ErrorResponse {
+	status: u16,
+	message: String
 }
 
 #[handler]
@@ -107,12 +127,26 @@ async fn get_resource<'a>(_req: &mut Request, _res: &mut Response) {
         match request_signed_url(_file_name.unwrap(), http::Method::GET, _seconds).await {
             Ok(url) => _res.render(Redirect::permanent(url)),
             Err(error) => {
+				log::error!("Interal Server Error: `{:}`", error.to_string());
+				let error_response = ErrorResponse {
+					status: StatusCode::INTERNAL_SERVER_ERROR.into(),
+					message: error.to_string()
+				};
+				_res.render(
+					Json(error_response)
+				);
                 _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
-                _res.render(Json(error.to_string()));
             }
         }
     } else {
-        _res.render("File Name is mandatory".to_string());
+		log::error!("File Name is mandatory");
+		let error_response = ErrorResponse {
+			status: StatusCode::INTERNAL_SERVER_ERROR.into(),
+			message: "File Name is mandatory".to_string()
+		};
+		_res.render(
+			Json(error_response)
+		);
         _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
     }
 }
@@ -126,12 +160,26 @@ async fn delete_resource<'a>(_req: &mut Request, _res: &mut Response) {
                 
             },
             Err(error) => {
+				log::error!("Interal Server Error: `{:}`", error.to_string());
+				let error_response: ErrorResponse = ErrorResponse {
+					status: StatusCode::INTERNAL_SERVER_ERROR.into(),
+					message: error.to_string()
+				};
+				_res.render(
+					Json(error_response)
+				);
                 _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
-                _res.render(Json(error.to_string()));
             }
         }
     } else {
-        _res.render("File Name is mandatory".to_string());
+		log::error!("File Name is mandatory");
+		let error_response: ErrorResponse = ErrorResponse {
+			status: StatusCode::INTERNAL_SERVER_ERROR.into(),
+			message: "File Name is mandatory".to_string()
+		};
+		_res.render(
+			Json(error_response)
+		);
         _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
     }
 }
@@ -154,8 +202,15 @@ async fn get_resources_file_container_based<'a>(_req: &mut Request, _res: &mut R
            _res.render(Json(_objects))
         },
         Err(error) => {
+			log::error!("Interal Server Error: `{:}`", error.to_string());
+			let error_response: ErrorResponse = ErrorResponse {
+				status: StatusCode::INTERNAL_SERVER_ERROR.into(),
+				message: error.to_string()
+			};
+			_res.render(
+				Json(error_response)
+			);
             _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
-            _res.render(Json(error.to_string()));
         }
     }
 }
@@ -183,14 +238,28 @@ async fn get_presigned_url_put_file_container_based<'a>(_req: &mut Request, _res
                     file_name: Some(_valid_file_name)
                 })),
                 Err(error) => {
+					log::error!("Interal Server Error: `{:}`", error.to_string());
+					let error_response: ErrorResponse = ErrorResponse {
+						status: StatusCode::INTERNAL_SERVER_ERROR.into(),
+						message: error.to_string()
+					};
+					_res.render(
+						Json(error_response)
+					);
                     _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
-                    _res.render(Json(error.to_string()));
                 }
             }
         },
         Err(error) => {
+			log::error!("Interal Server Error: `{:}`", error.to_string());
+			let error_response: ErrorResponse = ErrorResponse {
+				status: StatusCode::INTERNAL_SERVER_ERROR.into(),
+				message: error.to_string()
+			};
+			_res.render(
+				Json(error_response)
+			);
             _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
-            _res.render(Json(error.to_string()));
         }
     }
 }
@@ -203,12 +272,26 @@ async fn get_presigned_url_download_file<'a>(_req: &mut Request, _res: &mut Resp
         match request_signed_url(_file_name.unwrap(), http::Method::GET, _seconds).await {
             Ok(url) => _res.render(Json(url)),
             Err(error) => {
+				log::error!("Interal Server Error: `{:}`", error.to_string());
+				let error_response: ErrorResponse = ErrorResponse {
+					status: StatusCode::INTERNAL_SERVER_ERROR.into(),
+					message: error.to_string()
+				};
+				_res.render(
+					Json(error_response)
+				);
                 _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
-                _res.render(Json(error.to_string()));
             }
         }
     } else {
-        _res.render("File Name is mandatory".to_string());
+		log::error!("File Name is mandatory");
+		let error_response: ErrorResponse = ErrorResponse {
+			status: StatusCode::INTERNAL_SERVER_ERROR.into(),
+			message: "File Name is mandatory".to_string()
+		};
+		_res.render(
+			Json(error_response)
+		);
         _res.status_code(StatusCode::INTERNAL_SERVER_ERROR);
     }
 }

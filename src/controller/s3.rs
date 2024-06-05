@@ -14,28 +14,37 @@ use std::path::Path;
 
 fn get_valid_path(_client_id: Option<String>, _container_id: Option<String>, _container_type: Option<String>, _table_name: Option<String>, _column_name: Option<String>, _record_id: Option<String>, _user_id: Option<String>, _role_id: Option<String>, _include_access: bool) -> Result<String, std::io::Error> {
     if _client_id.to_owned().is_none() {
+		log::error!("Client ID is Mandatory");
         return Err(Error::new(ErrorKind::InvalidData.into(), "Client ID is Mandatory"))
     }
-    if _container_id.to_owned().is_none() {
-        return Err(Error::new(ErrorKind::InvalidData.into(), "Container ID is Mandatory"))
-    }
     if _container_type.to_owned().is_none() {
+		log::error!("Container Type is Mandatory");
         return Err(Error::new(ErrorKind::InvalidData.into(), "Container Type is Mandatory"))
     }
+
+	if _container_id.is_none() && _container_type.as_ref().map_or(true, |s| s != "window") {
+		log::error!("Container ID is Mandatory");
+		return Err(Error::new(ErrorKind::InvalidData.into(), "Container ID is Mandatory"))
+	}
     if _record_id.to_owned().is_some() && _table_name.to_owned().is_none() {
-        return Err(Error::new(ErrorKind::InvalidData.into(), "Table Name is Mandatory"))
+		log::error!("Table Name is Mandatory");
+		return Err(Error::new(ErrorKind::InvalidData.into(), "Table Name is Mandatory"))
     }
     if _record_id.to_owned().is_none() && _table_name.to_owned().is_some() {
+		log::error!("Record ID is Mandatory");
         return Err(Error::new(ErrorKind::InvalidData.into(), "Record ID is Mandatory"))
     }
     if _column_name.to_owned().is_some() && _table_name.to_owned().is_none() {
+		log::error!("Table Name is Mandatory");
         return Err(Error::new(ErrorKind::InvalidData.into(), "Table Name is Mandatory"))
     }
     if !matches!(_container_type.clone().unwrap().as_ref(), "window" | "process" | "report" | "browser" | "form" | "application" | "resource") {
+		log::error!("Invalid Container Type");
         return Err(Error::new(ErrorKind::InvalidData.into(), "Invalid Container Type"))
     }
     if _table_name.is_none() || _record_id.is_none() {
         if !matches!(_container_type.clone().unwrap().as_ref(), "application" | "resource") {
+			log::error!("Invalid Container Type (Mandatory Record ID and Table Name)");
             return Err(Error::new(ErrorKind::InvalidData.into(), "Invalid Container Type (Mandatory Record ID and Table Name)"))
         }
     }
@@ -58,14 +67,17 @@ fn get_valid_path(_client_id: Option<String>, _container_id: Option<String>, _co
         _folder.push_str("client");
         _folder.push_str("/");
     }
-    //  Container
+
     //  Continer Type
     _folder.push_str(&get_valid_path_name(_container_type.unwrap()));
     _folder.push_str("/");
-    _folder.push_str(&get_valid_path_name(_container_id.unwrap()));
+	//  Continer Type
+	if _container_id.is_some() && _container_id.as_ref().map_or(true, |s| s != "window") {
+		_folder.push_str(&get_valid_path_name(_container_id.unwrap()));
+		_folder.push_str("/");
+	}
     //  Table Name
     if _table_name.to_owned().is_some() {
-        _folder.push_str("/");
         _folder.push_str(&get_valid_path_name(_table_name.unwrap()));
         _folder.push_str("/");
         _folder.push_str(&get_valid_path_name(_record_id.unwrap()));
@@ -85,12 +97,13 @@ fn get_valid_path_name(_value: String) -> String {
 }
 
 fn get_valid_file_path(_value: String) -> String {
-    let regex = Regex::new(r"[^A-Za-z0-9.-]").unwrap();
+	let regex = Regex::new(r"[^A-Za-z0-9.-_]").unwrap();
     regex.replace_all(&_value, "").to_string()
 }
 
 pub fn get_valid_file_name(_client_id: Option<String>, _container_id: Option<String>, _file_name: Option<String>, _container_type: Option<String>, _table_name: Option<String>, _column_name: Option<String>, _record_id: Option<String>, _user_id: Option<String>, _role_id: Option<String>) -> Result<String, std::io::Error> {
     if _file_name.to_owned().is_none() {
+		log::error!("File Name is Mandatory");
         return Err(Error::new(ErrorKind::InvalidData.into(), "File Name is Mandatory"))
     }
     let _value = get_valid_path(_client_id, _container_id, _container_type, _table_name, _column_name, _record_id, _user_id, _role_id, true);
@@ -110,28 +123,28 @@ pub async fn get_list_objects(_client_id: Option<String>, _container_id: Option<
     let _s3_url =  match env::var("S3_URL") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `S3_URL` Not found");
+			log::warn!("Variable `S3_URL` Not found");
             "".to_owned()
         }.to_owned(),
     };
     let _bucket_name =  match env::var("BUCKET_NAME") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `BUCKET_NAME` Not found");
+			log::warn!("Variable `BUCKET_NAME` Not found");
             "".to_owned()
         }.to_owned(),
     };
     let _api_key =  match env::var("API_KEY") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `API_KEY` Not found");
+			log::warn!("Variable `API_KEY` Not found");
             "".to_owned()
         }.to_owned(),
     };
     let _secret_key =  match env::var("SECRET_KEY") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `SECRET_KEY` Not found");
+			log::warn!("Variable `SECRET_KEY` Not found");
             "".to_owned()
         }.to_owned(),
     };
@@ -248,28 +261,28 @@ pub async fn request_signed_url(_file_name: String, _method: Method, _seconds: O
     let _s3_url =  match env::var("S3_URL") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `S3_URL` Not found");
+			log::warn!("Variable `S3_URL` Not found");
             "".to_owned()
         }.to_owned(),
     };
     let _bucket_name =  match env::var("BUCKET_NAME") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `BUCKET_NAME` Not found");
+			log::warn!("Variable `BUCKET_NAME` Not found");
             "".to_owned()
         }.to_owned(),
     };
     let _api_key =  match env::var("API_KEY") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `API_KEY` Not found");
+			log::warn!("Variable `API_KEY` Not found");
             "".to_owned()
         }.to_owned(),
     };
     let _secret_key =  match env::var("SECRET_KEY") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `SECRET_KEY` Not found");
+			log::warn!("Variable `SECRET_KEY` Not found");
             "".to_owned()
         }.to_owned(),
     };
@@ -331,28 +344,28 @@ pub async fn delete_object(_file_name: String) -> Result<(), std::io::Error> {
     let _s3_url =  match env::var("S3_URL") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `S3_URL` Not found");
+			log::warn!("Variable `S3_URL` Not found");
             "".to_owned()
         }.to_owned(),
     };
     let _bucket_name =  match env::var("BUCKET_NAME") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `BUCKET_NAME` Not found");
+			log::warn!("Variable `BUCKET_NAME` Not found");
             "".to_owned()
         }.to_owned(),
     };
     let _api_key =  match env::var("API_KEY") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `API_KEY` Not found");
+			log::warn!("Variable `API_KEY` Not found");
             "".to_owned()
         }.to_owned(),
     };
     let _secret_key =  match env::var("SECRET_KEY") {
         Ok(value) => value,
         Err(_) => {
-            log::info!("Variable `SECRET_KEY` Not found");
+			log::warn!("Variable `SECRET_KEY` Not found");
             "".to_owned()
         }.to_owned(),
     };
