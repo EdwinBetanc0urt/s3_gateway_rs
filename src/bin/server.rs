@@ -67,11 +67,14 @@ async fn main() {
         .allow_headers(vec![header::ACCESS_CONTROL_REQUEST_METHOD, header::ACCESS_CONTROL_REQUEST_HEADERS, header::AUTHORIZATION])
         .into_handler()
     ;
-    // TODO: Add generic ok response to OPTIONS http method
-    let router = Router::new()
+
+	let router = Router::new()
         .hoop(cors_handler)
         .push(
-            Router::with_path("api")
+			// /api
+			Router::with_path("api")
+				.options(options_response)
+				.get(get_system_info)
                 .push(
                     Router::with_path("resources")
 						.options(options_response)
@@ -111,6 +114,32 @@ async fn main() {
 #[handler]
 async fn options_response<'a>(_req: &mut Request, _res: &mut Response) {
 	_res.status_code(StatusCode::NO_CONTENT);
+}
+
+#[derive(Serialize)]
+struct SystemInfoResponse {
+	version: String
+}
+
+#[handler]
+async fn get_system_info<'a>(_req: &mut Request, _res: &mut Response) {
+	let version: String = match env::var("VERSION") {
+		Ok(value) => value,
+		Err(_) => {
+			log::info!("Variable `VERSION` Not found from enviroment, as default `1.0.0-dev`");
+			"1.0.0-dev".to_owned()
+		}.to_owned()
+	};
+
+	let system_info_response = SystemInfoResponse {
+		version: version.to_string(),
+	};
+
+	_res.status_code(StatusCode::OK)
+		.render(
+			Json(system_info_response)
+		)
+	;
 }
 
 #[derive(Serialize)]
