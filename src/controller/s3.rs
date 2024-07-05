@@ -18,8 +18,8 @@ fn get_valid_path(_client_id: Option<String>, _container_id: Option<String>, _co
         return Err(Error::new(ErrorKind::InvalidData.into(), "Client ID is Mandatory"))
     }
     if _container_type.to_owned().is_none() {
+        log::error!("Container Type is Mandatory");
         return Err(Error::new(ErrorKind::InvalidData.into(), "Container Type is Mandatory"))
-		log::error!("Container Type is Mandatory");
     }
 
     if _record_id.to_owned().is_some() && _table_name.to_owned().is_none() {
