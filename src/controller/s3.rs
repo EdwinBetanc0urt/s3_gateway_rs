@@ -18,14 +18,10 @@ fn get_valid_path(_client_id: Option<String>, _container_id: Option<String>, _co
         return Err(Error::new(ErrorKind::InvalidData.into(), "Client ID is Mandatory"))
     }
     if _container_type.to_owned().is_none() {
-		log::error!("Container Type is Mandatory");
         return Err(Error::new(ErrorKind::InvalidData.into(), "Container Type is Mandatory"))
+		log::error!("Container Type is Mandatory");
     }
 
-	if _container_id.is_none() && _container_type.as_ref().map_or(true, |s| s != "window") {
-		log::error!("Container ID is Mandatory");
-		return Err(Error::new(ErrorKind::InvalidData.into(), "Container ID is Mandatory"))
-	}
     if _record_id.to_owned().is_some() && _table_name.to_owned().is_none() {
 		log::error!("Table Name is Mandatory");
 		return Err(Error::new(ErrorKind::InvalidData.into(), "Table Name is Mandatory"))
@@ -38,12 +34,16 @@ fn get_valid_path(_client_id: Option<String>, _container_id: Option<String>, _co
 		log::error!("Table Name is Mandatory");
         return Err(Error::new(ErrorKind::InvalidData.into(), "Table Name is Mandatory"))
     }
-    if !matches!(_container_type.clone().unwrap().as_ref(), "window" | "process" | "report" | "browser" | "form" | "application" | "resource") {
+    if !matches!(_container_type.clone().unwrap().as_ref(), "window" | "process" | "report" | "browser" | "form" | "application" | "resource" | "attachment") {
 		log::error!("Invalid Container Type");
         return Err(Error::new(ErrorKind::InvalidData.into(), "Invalid Container Type"))
     }
+    if _container_id.is_none() && !_container_type.to_owned().unwrap().eq("attachment") {
+		log::error!("Container ID is Mandatory");
+		return Err(Error::new(ErrorKind::InvalidData.into(), "Container ID is Mandatory"))
+	}
     if _table_name.is_none() || _record_id.is_none() {
-        if !matches!(_container_type.clone().unwrap().as_ref(), "application" | "resource") {
+        if _container_type.to_owned().unwrap().eq("attachment") {
 			log::error!("Invalid Container Type (Mandatory Record ID and Table Name)");
             return Err(Error::new(ErrorKind::InvalidData.into(), "Invalid Container Type (Mandatory Record ID and Table Name)"))
         }
@@ -68,16 +68,16 @@ fn get_valid_path(_client_id: Option<String>, _container_id: Option<String>, _co
         _folder.push_str("/");
     }
 
-    //  Continer Type
+    //  Container Type
     _folder.push_str(&get_valid_path_name(_container_type.unwrap()));
-    _folder.push_str("/");
-	//  Continer Type
-	if _container_id.is_some() && _container_id.as_ref().map_or(true, |s| s != "window") {
-		_folder.push_str(&get_valid_path_name(_container_id.unwrap()));
+	//  Container ID
+	if _container_id.is_some() {
 		_folder.push_str("/");
+        _folder.push_str(&get_valid_path_name(_container_id.unwrap()));
 	}
     //  Table Name
     if _table_name.to_owned().is_some() {
+        _folder.push_str("/");
         _folder.push_str(&get_valid_path_name(_table_name.unwrap()));
         _folder.push_str("/");
         _folder.push_str(&get_valid_path_name(_record_id.unwrap()));
@@ -98,7 +98,7 @@ fn get_valid_path_name(_value: String) -> String {
 
 fn get_valid_file_path(_value: String) -> String {
 	let regex = Regex::new(r"[^A-Za-z0-9.-_]").unwrap();
-    regex.replace_all(&_value, "").to_string()
+    regex.replace_all(&_value, "_").to_string()
 }
 
 pub fn get_valid_file_name(_client_id: Option<String>, _container_id: Option<String>, _file_name: Option<String>, _container_type: Option<String>, _table_name: Option<String>, _column_name: Option<String>, _record_id: Option<String>, _user_id: Option<String>, _role_id: Option<String>) -> Result<String, std::io::Error> {
