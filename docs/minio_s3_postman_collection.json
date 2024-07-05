@@ -11,6 +11,574 @@
 			"name": "Dictionary",
 			"item": [
 				{
+					"name": "Attachment",
+					"item": [
+						{
+							"name": "Presigned Url (Attachment)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/presigned-url/{{client_id}}/Image Hola.jpeg?container_type=attachment&table_name=C_BPartner&record_id=1000012",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"presigned-url",
+										"{{client_id}}",
+										"Image Hola.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "attachment",
+											"description": "Supported Values:\n - window\n - process\n - report\n - browser\n - form\n - resource\n - attachment "
+										},
+										{
+											"key": "table_name",
+											"value": "C_BPartner"
+										},
+										{
+											"key": "record_id",
+											"value": "1000012"
+										},
+										{
+											"key": "user_id",
+											"value": "100",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/presigned-url/1000000/50003/Image 01 *.jpeg?container_type=window&table_name=C_BPartner&record_id=1000012",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"presigned-url",
+												"1000000",
+												"50003",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "window"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "433"
+										},
+										{
+											"key": "date",
+											"value": "Wed, 21 Feb 2024 16:00:42 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"url\": \"http://localhost:9000/adempiere/1000000/client/window/50003/c_bpartner/1000012/image01.jpeg?X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=adempiere%2F20240221%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240221T160043Z&X-Amz-Signature=7fa00374ebe6b997e108716ac7493de34d45294584daf6e3ea873fc19ded6251\",\n    \"file_name\": \"1000000/client/window/50003/c_bpartner/1000012/image01.jpeg\"\n}"
+								}
+							]
+						},
+						{
+							"name": "List Resources (Attachment)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/resources?table_name=C_BPartner&record_id=1000012&client_id={{client_id}}&container_type=attachment",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"resources"
+									],
+									"query": [
+										{
+											"key": "table_name",
+											"value": "C_BPartner"
+										},
+										{
+											"key": "record_id",
+											"value": "1000012"
+										},
+										{
+											"key": "user_id",
+											"value": "100",
+											"disabled": true
+										},
+										{
+											"key": "client_id",
+											"value": "{{client_id}}"
+										},
+										{
+											"key": "container_type",
+											"value": "attachment"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/resources?container_type=window&client_id=1000000&container_id=50003&table_name=C_BPartner&record_id=1000012",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"resources"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "window",
+													"description": "Supported Values:\n - window\n - process\n - report\n - browser\n - form\n - application\n - resource"
+												},
+												{
+													"key": "client_id",
+													"value": "1000000"
+												},
+												{
+													"key": "container_id",
+													"value": "50003"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "1098"
+										},
+										{
+											"key": "date",
+											"value": "Wed, 21 Feb 2024 19:44:40 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"parent_folder\": \"1000000/client/window/50003/c_bpartner/1000012\",\n    \"resources\": [\n        {\n            \"name\": \"1000000/client/window/50003/c_bpartner/1000012/image01.jpeg\",\n            \"last_modified\": \"2024-02-21 16:02:19\",\n            \"etag\": \"\\\"190e5956646a9a9281de73b9366aa668\\\"\",\n            \"owner_name\": null,\n            \"size\": 371710315,\n            \"storage_class\": \"STANDARD\",\n            \"is_latest\": false,\n            \"version_id\": null,\n            \"user_metadata\": null,\n            \"is_prefix\": false,\n            \"is_delete_marker\": false,\n            \"encoding_type\": null\n        },\n        {\n            \"name\": \"1000000/client/window/50003/c_bpartner/1000012/imagehola.jpeg\",\n            \"last_modified\": \"2024-02-21 19:33:50\",\n            \"etag\": \"\\\"4cf34cc3b8cd466c729b71faecbf660a\\\"\",\n            \"owner_name\": null,\n            \"size\": 84237,\n            \"storage_class\": \"STANDARD\",\n            \"is_latest\": false,\n            \"version_id\": null,\n            \"user_metadata\": null,\n            \"is_prefix\": false,\n            \"is_delete_marker\": false,\n            \"encoding_type\": null\n        },\n        {\n            \"name\": \"1000000/client/window/50003/c_bpartner/1000012/logo_id/image01.jpeg\",\n            \"last_modified\": \"2024-02-21 16:02:48\",\n            \"etag\": \"\\\"c0a7ce49e29fb795a1b2c3c84a1b7a0c\\\"\",\n            \"owner_name\": null,\n            \"size\": 5773640,\n            \"storage_class\": \"STANDARD\",\n            \"is_latest\": false,\n            \"version_id\": null,\n            \"user_metadata\": null,\n            \"is_prefix\": false,\n            \"is_delete_marker\": false,\n            \"encoding_type\": null\n        }\n    ]\n}"
+								},
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/resources?container_type=window&client_id=1000000&container_id=50003&table_name=C_BPartner",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"resources"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "window"
+												},
+												{
+													"key": "client_id",
+													"value": "1000000"
+												},
+												{
+													"key": "container_id",
+													"value": "50003"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012",
+													"disabled": true
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "40"
+										},
+										{
+											"key": "date",
+											"value": "Wed, 21 Feb 2024 16:10:17 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "\"Table Name and Record ID are Mandatory\""
+								},
+								{
+									"name": "Ok Mime Type",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/resources?container_type=window&client_id=1000000&container_id=50003&table_name=C_BPartner&record_id=1000012",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"resources"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "window",
+													"description": "Supported Values:\n - window\n - process\n - report\n - browser\n - form\n - application\n - resource"
+												},
+												{
+													"key": "client_id",
+													"value": "1000000"
+												},
+												{
+													"key": "container_id",
+													"value": "50003"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "1544"
+										},
+										{
+											"key": "date",
+											"value": "Wed, 21 Feb 2024 22:19:35 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"parent_folder\": \"1000000/client/window/50003/c_bpartner/1000012\",\n    \"resources\": [\n        {\n            \"name\": \"1000000/client/window/50003/c_bpartner/1000012/epale.mp4\",\n            \"last_modified\": \"2024-02-21 22:19:12\",\n            \"etag\": \"\\\"d571bb996d3a288f6dcfdf87eac895fb\\\"\",\n            \"owner_name\": null,\n            \"size\": 133396096,\n            \"storage_class\": \"STANDARD\",\n            \"is_latest\": false,\n            \"version_id\": null,\n            \"user_metadata\": null,\n            \"is_prefix\": false,\n            \"is_delete_marker\": false,\n            \"encoding_type\": null,\n            \"content_type\": \"video/mp4\"\n        },\n        {\n            \"name\": \"1000000/client/window/50003/c_bpartner/1000012/image01.jpeg\",\n            \"last_modified\": \"2024-02-21 16:02:19\",\n            \"etag\": \"\\\"190e5956646a9a9281de73b9366aa668\\\"\",\n            \"owner_name\": null,\n            \"size\": 371710315,\n            \"storage_class\": \"STANDARD\",\n            \"is_latest\": false,\n            \"version_id\": null,\n            \"user_metadata\": null,\n            \"is_prefix\": false,\n            \"is_delete_marker\": false,\n            \"encoding_type\": null,\n            \"content_type\": \"image/jpeg\"\n        },\n        {\n            \"name\": \"1000000/client/window/50003/c_bpartner/1000012/imagehola.jpeg\",\n            \"last_modified\": \"2024-02-21 19:33:50\",\n            \"etag\": \"\\\"4cf34cc3b8cd466c729b71faecbf660a\\\"\",\n            \"owner_name\": null,\n            \"size\": 84237,\n            \"storage_class\": \"STANDARD\",\n            \"is_latest\": false,\n            \"version_id\": null,\n            \"user_metadata\": null,\n            \"is_prefix\": false,\n            \"is_delete_marker\": false,\n            \"encoding_type\": null,\n            \"content_type\": \"image/jpeg\"\n        },\n        {\n            \"name\": \"1000000/client/window/50003/c_bpartner/1000012/logo_id/image01.jpeg\",\n            \"last_modified\": \"2024-02-21 16:02:48\",\n            \"etag\": \"\\\"c0a7ce49e29fb795a1b2c3c84a1b7a0c\\\"\",\n            \"owner_name\": null,\n            \"size\": 5773640,\n            \"storage_class\": \"STANDARD\",\n            \"is_latest\": false,\n            \"version_id\": null,\n            \"user_metadata\": null,\n            \"is_prefix\": false,\n            \"is_delete_marker\": false,\n            \"encoding_type\": null,\n            \"content_type\": \"image/jpeg\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Get File (Attachment)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/resources/{{client_id}}/client/attachment/c_bpartner/1000012/image_hola.jpeg",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"resources",
+										"{{client_id}}",
+										"client",
+										"attachment",
+										"c_bpartner",
+										"1000012",
+										"image_hola.jpeg"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Presigned Url (User Tmp)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7878/api/presigned-url/{{client_id}}/tmp/Image Hola.jpeg?container_type=resource&user_id={{user_id}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7878",
+									"path": [
+										"api",
+										"presigned-url",
+										"{{client_id}}",
+										"tmp",
+										"Image Hola.jpeg"
+									],
+									"query": [
+										{
+											"key": "container_type",
+											"value": "resource",
+											"description": "Supported Values:\n - window\n - process\n - report\n - browser\n - form\n - resource\n - attachment "
+										},
+										{
+											"key": "user_id",
+											"value": "{{user_id}}"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Ok",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7878/api/presigned-url/1000000/50003/Image 01 *.jpeg?container_type=window&table_name=C_BPartner&record_id=1000012",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7878",
+											"path": [
+												"api",
+												"presigned-url",
+												"1000000",
+												"50003",
+												"Image 01 *.jpeg"
+											],
+											"query": [
+												{
+													"key": "container_type",
+													"value": "window"
+												},
+												{
+													"key": "table_name",
+													"value": "C_BPartner"
+												},
+												{
+													"key": "record_id",
+													"value": "1000012"
+												},
+												{
+													"key": "user_id",
+													"value": "100",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-method"
+										},
+										{
+											"key": "vary",
+											"value": "access-control-request-headers"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "433"
+										},
+										{
+											"key": "date",
+											"value": "Wed, 21 Feb 2024 16:00:42 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"url\": \"http://localhost:9000/adempiere/1000000/client/window/50003/c_bpartner/1000012/image01.jpeg?X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=adempiere%2F20240221%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240221T160043Z&X-Amz-Signature=7fa00374ebe6b997e108716ac7493de34d45294584daf6e3ea873fc19ded6251\",\n    \"file_name\": \"1000000/client/window/50003/c_bpartner/1000012/image01.jpeg\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "Presigned Url (Container)",
 					"request": {
 						"auth": {
@@ -237,7 +805,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:7878/api/presigned-url/1000000/50003/Image Hola.jpeg?container_type=window&table_name=C_BPartner&record_id=1000012",
+							"raw": "http://localhost:7878/api/presigned-url/{{client_id}}/50003/Image Hola.jpeg?container_type=window&table_name=C_BPartner&record_id=1000012",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -246,7 +814,7 @@
 							"path": [
 								"api",
 								"presigned-url",
-								"1000000",
+								"{{client_id}}",
 								"50003",
 								"Image Hola.jpeg"
 							],
@@ -254,7 +822,7 @@
 								{
 									"key": "container_type",
 									"value": "window",
-									"description": "Supported Values:\n - window\n - process\n - report\n - browser\n - form\n - resource"
+									"description": "Supported Values:\n - window\n - process\n - report\n - browser\n - form\n - resource\n - attachment "
 								},
 								{
 									"key": "table_name",
@@ -1364,7 +1932,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:7878/api/presigned-url/1000000/zfx-25648854-256/Image 01 *.jpeg?container_type=resource",
+							"raw": "http://localhost:7878/api/presigned-url/{{client_id}}/zfx-25648854-256/Image 01 *.jpeg?container_type=resource&table_name=C_BPartner&record_id=1000012",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1373,7 +1941,7 @@
 							"path": [
 								"api",
 								"presigned-url",
-								"1000000",
+								"{{client_id}}",
 								"zfx-25648854-256",
 								"Image 01 *.jpeg"
 							],
@@ -1385,13 +1953,11 @@
 								},
 								{
 									"key": "table_name",
-									"value": "C_BPartner",
-									"disabled": true
+									"value": "C_BPartner"
 								},
 								{
 									"key": "record_id",
-									"value": "1000012",
-									"disabled": true
+									"value": "1000012"
 								},
 								{
 									"key": "user_id",
@@ -2044,6 +2610,41 @@
 					"body": null
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "client_id",
+			"value": "8d4e103d-6add-474f-948d-3d9bcbe7b541",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "bef95ce0-1b93-411f-8eb3-170040f94f96"
+		},
+		{
+			"key": "tmp_resource_id",
+			"value": "tmp"
 		}
 	]
 }
