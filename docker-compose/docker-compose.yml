@@ -48,7 +48,7 @@ services:
     container_name: ${S3_GATEWAY_RS_HOST}
     restart: ${GENERIC_RESTART}
     depends_on:
-      s3.service:
+      s3.storage:
         condition: service_healthy
     environment:
       S3_URL: ${S3_GATEWAY_RS_S3_URL}
